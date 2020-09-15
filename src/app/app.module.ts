@@ -16,6 +16,9 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { CatDropdownComponent } from './cat-dropdown/cat-dropdown.component';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NuwaHeaderComponent } from './nuwa-header/nuwa-header.component';
+import { NzPopoverModule } from 'ng-zorro-antd/popover';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 
 
 registerLocaleData(en);
@@ -23,7 +26,8 @@ registerLocaleData(en);
 @NgModule({
   declarations: [
     AppComponent,
-    CatDropdownComponent
+    CatDropdownComponent,
+    NuwaHeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +38,9 @@ registerLocaleData(en);
     NzButtonModule,
     NzSelectModule,
     NzDropDownModule,
-    NzIconModule
+    NzIconModule,
+    NzPopoverModule,
+    NzAvatarModule
 
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],

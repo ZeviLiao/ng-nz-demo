@@ -1,0 +1,29 @@
+<header class="test-bg">
+  <span class="logo">
+    <img src="assets/images/pic01.png" alt="" />
+  </span>
+  <span>PPT</span>
+  <span>
+    <select>
+      <option>a</option>
+      <option>b</option>
+    </select>
+  </span>
+  <img src="assets/images/pic02.png" alt="" />
+
+  <nz-avatar
+    nz-popover
+    nzPopoverTitle="Title"
+    [(nzPopoverVisible)]="visible"
+    (nzPopoverVisibleChange)="change($event)"
+    nzPopoverTrigger="click"
+    [nzPopoverContent]="contentTemplate"
+    nzPopoverPlacement="bottomRight"
+    nzSize="large"
+    nzIcon="user"
+  ></nz-avatar>
+
+  <ng-template #contentTemplate>
+    <a (click)="clickMe()">Close</a>
+  </ng-template>
+</header>
