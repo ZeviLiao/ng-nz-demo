@@ -15,6 +15,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { CatDropdownComponent } from './cat-dropdown/cat-dropdown.component';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
 
 registerLocaleData(en);
@@ -32,7 +33,8 @@ registerLocaleData(en);
     BrowserAnimationsModule,
     NzButtonModule,
     NzSelectModule,
-    NzDropDownModule
+    NzDropDownModule,
+    NzIconModule
 
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
