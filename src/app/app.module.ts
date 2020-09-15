@@ -10,7 +10,10 @@ import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
-import { NgZorroAntdModule} from 'ng-zorro-antd';
+// import { NgZorroAntdModule} from 'ng-zorro-antd';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 
 
 registerLocaleData(en);
@@ -25,7 +28,10 @@ registerLocaleData(en);
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    NgZorroAntdModule
+    NzButtonModule,
+    NzSelectModule,
+    NzDropDownModule
+
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
