@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-cat-dropdown',
-  templateUrl: './cat-dropdown.component.html'
+  templateUrl: './cat-dropdown.component.html',
+  styleUrls: ['./cat-dropdown.component.scss']
 })
 export class CatDropdownComponent {
 
@@ -12,5 +13,8 @@ export class CatDropdownComponent {
   }
   editCat(data: string): void {
     alert('edit');
+  }
+  checkInx(val: number): boolean {
+    return this.curCat.startsWith(val + '');
   }
 }

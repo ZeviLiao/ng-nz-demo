@@ -1,14 +1,21 @@
-
-    <button nz-button nz-dropdown [nzDropdownMenu]="menu">
-      {{curCat}}
-      <i nz-icon nzType="down"></i>
-    </button>
-    <nz-dropdown-menu #menu="nzDropdownMenu">
-      <ul nz-menu nzSelectable>
-        <li nz-menu-item nzSelected (click)="log('1st menu item')">1st menu item</li>
-        <li nz-menu-item (click)="log('2nd menu item')">2nd menu item</li>
-        <li nz-menu-divider></li>
-        <li nz-menu-item (click)="editCat('3rd menu item')">3rd menu item</li>
-      </ul>
-    </nz-dropdown-menu>
-  
+<button nz-button nz-dropdown [nzDropdownMenu]="menu">
+  {{ curCat }}
+  <i nz-icon nzType="down"></i>
+</button>
+<nz-dropdown-menu #menu="nzDropdownMenu">
+  <ul nz-menu nzSelectable>
+    <li nz-menu-item nzSelected (click)="log('1st menu item')" class="flex-btw">
+      <span>1st menu item</span>
+      <i nz-icon nzType="check" nzTheme="outline" *ngIf="checkInx(1)"></i>
+    </li>
+    <li nz-menu-item (click)="log('2nd menu item')" class="flex-btw">
+      <span>2nd menu item</span>
+      <i nz-icon nzType="check" nzTheme="outline" *ngIf="checkInx(2)"></i>
+    </li>
+    <li nz-menu-divider></li>
+    <li nz-menu-item (click)="editCat('3rd menu item')" class="flex-btw">
+      <span>3rd menu item</span>
+      <i nz-icon nzType="check" nzTheme="outline" *ngIf="checkInx(3)"></i>
+    </li>
+  </ul>
+</nz-dropdown-menu>
