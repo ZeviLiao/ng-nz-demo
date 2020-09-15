@@ -5,10 +5,10 @@
     </button>
     <nz-dropdown-menu #menu="nzDropdownMenu">
       <ul nz-menu nzSelectable>
-        <li nz-menu-item (click)="log('1st menu item')">1st menu item</li>
+        <li nz-menu-item nzSelected (click)="log('1st menu item')">1st menu item</li>
         <li nz-menu-item (click)="log('2nd menu item')">2nd menu item</li>
         <li nz-menu-divider></li>
-        <li nz-menu-item nzDashed (click)="editCat('3rd menu item')">3rd menu item</li>
+        <li nz-menu-item (click)="editCat('3rd menu item')">3rd menu item</li>
       </ul>
     </nz-dropdown-menu>
   
