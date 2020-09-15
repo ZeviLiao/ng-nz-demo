@@ -6,8 +6,11 @@ import { Component } from '@angular/core';
 })
 export class CatDropdownComponent {
 
-  menu = '';
+  curCat = '1st menu item';
   log(data: string): void {
-    console.log(data);
+    this.curCat = data;
+  }
+  editCat(data: string): void {
+    alert('edit');
   }
 }
