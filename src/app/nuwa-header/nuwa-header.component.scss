@@ -4,6 +4,7 @@
 
 a.button-link {
   .button-image {
+    display: inline-block;
     width: 40px;
     height: 40px;
     background: transparent url("/assets/images/tools-button-normal.svg")

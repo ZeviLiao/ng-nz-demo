@@ -9,9 +9,23 @@
       <option>b</option>
     </select>
   </span>
-  <a class="button-link">
+
+  <a
+    class="button-link"
+    nz-popover
+    nzPopoverTitle="Title"
+    [(nzPopoverVisible)]="visible2"
+    (nzPopoverVisibleChange)="change($event)"
+    nzPopoverTrigger="click"
+    [nzPopoverContent]="contentTemplate1"
+    nzPopoverPlacement="bottomRight"
+  >
     <div class="button-image"></div>
   </a>
+  <ng-template #contentTemplate1>
+    <a (click)="clickMe2()">Close2</a>
+  </ng-template>
+
   <!-- <img src="assets/images/tools-button-normal.svg" alt="" /> -->
 
   <nz-avatar
