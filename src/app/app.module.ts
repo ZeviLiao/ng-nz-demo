@@ -14,13 +14,15 @@ import en from '@angular/common/locales/en';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { CatDropdownComponent } from './cat-dropdown/cat-dropdown.component';
 
 
 registerLocaleData(en);
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CatDropdownComponent
   ],
   imports: [
     BrowserModule,
