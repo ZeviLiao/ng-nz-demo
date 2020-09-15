@@ -1,3 +1,18 @@
 .test-bg {
-  background-color: lightblue;
+  background-color: lightcoral;
+}
+
+a.button-link {
+  .button-image {
+    width: 40px;
+    height: 40px;
+    background: transparent url("/assets/images/tools-button-normal.svg")
+      no-repeat center center;
+  }
+  &:hover .button-image {
+    background-image: url("/assets/images/tools-button-hover.svg");
+  }
+  & .button-image.active {
+    background-image: url("/assets/images/tools-button-click.svg");
+  }
 }
