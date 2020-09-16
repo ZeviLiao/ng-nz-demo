@@ -13,6 +13,8 @@ export class PptListPageComponent implements OnInit {
   ngOnInit(): void {
   }
   contextMenu($event: MouseEvent, menu: NzDropdownMenuComponent): void {
+    $event.preventDefault();
+    $event.stopPropagation();
     this.nzContextMenuService.create($event, menu);
   }
 
