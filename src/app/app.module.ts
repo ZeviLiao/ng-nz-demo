@@ -17,6 +17,7 @@ import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { CatDropdownComponent } from './cat-dropdown/cat-dropdown.component';
 import { HeaderModule } from './header/header.module';
+import { PptListModule } from './ppt-list/ppt-list.module';
 
 
 registerLocaleData(en);
@@ -36,7 +37,8 @@ registerLocaleData(en);
     NzSelectModule,
     NzDropDownModule,
     NzIconModule,
-    HeaderModule
+    HeaderModule,
+    PptListModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
