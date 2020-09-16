@@ -14,8 +14,8 @@ import en from '@angular/common/locales/en';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
-import { CatDropdownComponent } from './cat-dropdown/cat-dropdown.component';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { CatDropdownComponent } from './cat-dropdown/cat-dropdown.component';
 import { HeaderModule } from './header/header.module';
 
 
