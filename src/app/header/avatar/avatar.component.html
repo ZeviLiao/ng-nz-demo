@@ -1,0 +1,15 @@
+<nz-avatar
+    nz-popover
+    nzPopoverTitle="Title"
+    [(nzPopoverVisible)]="visible"
+    (nzPopoverVisibleChange)="change($event)"
+    nzPopoverTrigger="click"
+    [nzPopoverContent]="contentTemplate"
+    nzPopoverPlacement="bottomRight"
+    nzSize="large"
+    nzIcon="user"
+  ></nz-avatar>
+
+  <ng-template #contentTemplate>
+    <a (click)="clickMe()">Close</a>
+  </ng-template>

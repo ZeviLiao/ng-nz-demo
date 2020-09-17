@@ -1,46 +1,12 @@
 <header class="test-bg">
-  <span class="logo">
-    <img src="assets/images/pic01.png" alt="" />
-  </span>
-  <span>PPT</span>
-  <span>
-    <select>
-      <option>a</option>
-      <option>b</option>
-    </select>
-  </span>
+  <app-logo></app-logo>
 
-  <a
-    class="button-link"
-    nz-popover
-    nzPopoverTitle="Title"
-    [(nzPopoverVisible)]="visible2"
-    (nzPopoverVisibleChange)="change($event)"
-    nzPopoverTrigger="click"
-    [nzPopoverContent]="contentTemplate1"
-    nzPopoverPlacement="bottomRight"
-  >
-    <div class="button-image"></div>
-  </a>
-  <ng-template #contentTemplate1>
-    <a (click)="clickMe2()">Close2</a>
-  </ng-template>
+<app-team-selector></app-team-selector>
+<app-lang-selector></app-lang-selector>
+
+<app-avatar></app-avatar>
 
   <!-- <img src="assets/images/tools-button-normal.svg" alt="" /> -->
 
-  <nz-avatar
-    nz-popover
-    nzPopoverTitle="Title"
-    [(nzPopoverVisible)]="visible"
-    (nzPopoverVisibleChange)="change($event)"
-    nzPopoverTrigger="click"
-    [nzPopoverContent]="contentTemplate"
-    nzPopoverPlacement="bottomRight"
-    nzSize="large"
-    nzIcon="user"
-  ></nz-avatar>
-
-  <ng-template #contentTemplate>
-    <a (click)="clickMe()">Close</a>
-  </ng-template>
+  
 </header>
