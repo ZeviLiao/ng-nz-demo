@@ -33,15 +33,15 @@
               }
             ],
             "styles": [
-              "./node_modules/bootstrap/dist/css/bootstrap.css",
-              "./node_modules/bootstrap-select/dist/css/bootstrap-select.css",
+              "node_modules/bootstrap/dist/css/bootstrap.css",
+              "node_modules/bootstrap-select/dist/css/bootstrap-select.css",
               "src/theme.less",
               "src/styles.scss"
             ],
             "scripts": [   
-              "./node_modules/jquery/dist/jquery.min.js",
-              "./node_modules/popper.js/dist/umd/popper.min.js",
-              "./node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/popper.js/dist/umd/popper.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js",
               "node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"
             ]
           },
