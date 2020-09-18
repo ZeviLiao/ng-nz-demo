@@ -12,10 +12,12 @@ export class AppComponent {
   constructor(private api: ApiService,
               private fakeData: FakeDataService,
               private broadcastService: BroadcastService
-
   ) {
-    this.broadcastService.subscribe('EVENT', (msg) => { this.msg = msg; });
-   }
+    this.broadcastService.subscribe('EVENT', (msg) => {
+      this.msg = msg;
+      alert('hello! ' + msg);
+    });
+  }
 
   title = 'ng-demo';
   public lucy;
@@ -40,7 +42,6 @@ export class AppComponent {
   }
 
   getTeams() {
-
     const data = this.fakeData.getTeamList();
     console.log(data);
   }
