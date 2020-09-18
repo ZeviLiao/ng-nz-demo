@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { BroadcastService } from '../../services/broadcastService';
 
 @Component({
   selector: 'app-avatar',
@@ -7,19 +8,36 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AvatarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private broadcastService: BroadcastService) { }
 
-  visible = false;
+  @Input() yourName: string;
+
+  // clickMe(): void {
+  //   this.visible = false;
+  // }
+
+  // change(value: boolean): void {
+  //   console.log(value);
+  // }
+
+  @Output() notify: EventEmitter<string> = new EventEmitter<string>();
+  // visible = false;
+
+  myhello() {
+    this.notify.emit(this.yourName);
+  }
 
   ngOnInit(): void {
   }
+  publishEvent(): void {
 
-  clickMe(): void {
-    this.visible = false;
+
+    this.broadcastService.boradcast('EVENT', 'zevi cast');
+
+    // if you want you can send a payload aswell.
+    // this.broadcastService.boradcast("EVENT", {'data': [{}, {}]});
   }
 
-  change(value: boolean): void {
-    console.log(value);
-  }
+
 
 }

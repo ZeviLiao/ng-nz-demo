@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ApiService } from './services/api.service';
 import { FakeDataService } from './services/fake-data.service';
+import { BroadcastService } from './services/broadcastService';
 
 @Component({
   selector: 'app-root',
@@ -9,13 +10,18 @@ import { FakeDataService } from './services/fake-data.service';
 })
 export class AppComponent {
   constructor(private api: ApiService,
-              private fakeData: FakeDataService
+              private fakeData: FakeDataService,
+              private broadcastService: BroadcastService
 
-  ) { }
+  ) {
+    this.broadcastService.subscribe('EVENT', (msg) => { this.msg = msg; });
+   }
 
   title = 'ng-demo';
   public lucy;
   public menu4;
+
+  public msg: string;
 
   callApi() {
     this.getSmartphones();

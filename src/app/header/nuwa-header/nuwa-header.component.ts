@@ -26,4 +26,8 @@ export class NuwaHeaderComponent implements OnInit {
     console.log(value);
   }
 
+  sayHelloName(val: string): void {
+    alert(val);
+  }
+
 }
