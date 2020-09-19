@@ -3,6 +3,8 @@ import { ApiService } from './services/api.service';
 import { FakeDataService } from './services/fake-data.service';
 import { BroadcastService } from './services/broadcastService';
 
+import {UserStore} from './store/userStore';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -11,7 +13,9 @@ import { BroadcastService } from './services/broadcastService';
 export class AppComponent {
   constructor(private api: ApiService,
               private fakeData: FakeDataService,
-              private broadcastService: BroadcastService
+              private broadcastService: BroadcastService,
+              private userStore: UserStore
+
   ) {
     this.broadcastService.subscribe('EVENT', (msg) => {
       this.msg = msg;
@@ -49,6 +53,13 @@ export class AppComponent {
   getTools() {
     const data = this.fakeData.getToolListByTeamId();
     console.log(data);
+  }
+
+  setUser() {
+    this.userStore.setCurrentUser({
+      id: 1,
+      name: 'zevi'
+    });
   }
 
 }

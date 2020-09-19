@@ -1,5 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { UserStore } from '../../store/userStore';
 import { BroadcastService } from '../../services/broadcastService';
+
+
 
 @Component({
   selector: 'app-avatar',
@@ -8,9 +11,13 @@ import { BroadcastService } from '../../services/broadcastService';
 })
 export class AvatarComponent implements OnInit {
 
-  constructor(private broadcastService: BroadcastService) { }
+  constructor(private broadcastService: BroadcastService,
+              private userStore: UserStore
+  ) { }
 
   @Input() yourName: string;
+
+  user: any;
 
   // clickMe(): void {
   //   this.visible = false;
@@ -38,6 +45,8 @@ export class AvatarComponent implements OnInit {
     // this.broadcastService.boradcast("EVENT", {'data': [{}, {}]});
   }
 
-
+  getUser() {
+    this.user = this.userStore.currentUser;
+  }
 
 }
