@@ -18,6 +18,10 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { CatDropdownComponent } from './cat-dropdown/cat-dropdown.component';
 import { HeaderModule } from './header/header.module';
 import { PptListModule } from './ppt-list/ppt-list.module';
+import { NzTreeModule } from 'ng-zorro-antd/tree';
+import { TreeDemoComponent } from './tree-demo/tree-demo.component';
+import { NzTableModule } from 'ng-zorro-antd/table';
+import { TableDemoComponent } from './table-demo/table-demo.component';
 
 
 registerLocaleData(en);
@@ -25,7 +29,9 @@ registerLocaleData(en);
 @NgModule({
   declarations: [
     AppComponent,
-    CatDropdownComponent
+    CatDropdownComponent,
+    TreeDemoComponent,
+    TableDemoComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +44,9 @@ registerLocaleData(en);
     NzDropDownModule,
     NzIconModule,
     HeaderModule,
-    PptListModule
+    PptListModule,
+    NzTreeModule,
+    NzTableModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
