@@ -1,0 +1,63 @@
+<!-- NG-ZORRO -->
+
+<app-nuwa-header></app-nuwa-header>
+
+<hr />
+<!-- <app-ppt-list-page></app-ppt-list-page> -->
+
+<button nz-button nzType="primary" (click)="callApi()">Primary</button>
+
+<button nz-button nzType="primary" (click)="getTeams()">team list</button>
+<button nz-button nzType="primary" (click)="getTools()">tools by team</button>
+
+<nz-select ngModel="lucy">
+  <nz-option nzValue="jack" nzLabel="Jack"></nz-option>
+  <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
+  <nz-option nzValue="disabled" nzLabel="Disabled" nzDisabled></nz-option>
+</nz-select>
+
+<app-cat-dropdown></app-cat-dropdown>
+
+{{ msg }}
+
+<div class="dropdown">
+  <button
+    class="btn btn-secondary dropdown-toggle"
+    type="button"
+    id="dropdownMenuButton"
+    data-toggle="dropdown"
+    aria-haspopup="true"
+    aria-expanded="false"
+  >
+    Dropdown button
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="#">Action</a>
+    <a class="dropdown-item" href="#">Another action</a>
+    <a class="dropdown-item" href="#">Something else here</a>
+  </div>
+</div>
+
+<button (click)="setUser()">setUser</button>
+
+<br />
+<br />
+
+
+<button
+  type="button"
+  class="btn btn-lg btn-danger"
+  data-toggle="popover"
+  title="Popover title"
+  data-content="And here's some amazing content. It's very engaging. Right?"
+>
+  Click to toggle popover
+</button>
+<a
+  href="#"
+  data-toggle="popover"
+  title="Popover Header"
+  data-content="Some content inside the popover"
+>
+  Toggle popover
+</a>
