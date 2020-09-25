@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NzFormatEmitEvent } from 'ng-zorro-antd/tree';
+import { NzFormatEmitEvent, NzTreeNode } from 'ng-zorro-antd/tree';
 
 @Component({
   selector: 'app-tree-demo',
@@ -7,6 +7,8 @@ import { NzFormatEmitEvent } from 'ng-zorro-antd/tree';
   styleUrls: ['./tree-demo.component.scss']
 })
 export class TreeDemoComponent {
+
+  searchValue = '';
   nodes = [
     {
       title: '0-0',
@@ -55,5 +57,17 @@ export class TreeDemoComponent {
 
   nzEvent(event: NzFormatEmitEvent): void {
     console.log(event);
+  }
+
+  openFolder(data: NzTreeNode | NzFormatEmitEvent): void {
+    // do something if u want
+    if (data instanceof NzTreeNode) {
+      data.isExpanded = !data.isExpanded;
+    } else {
+      const node = data.node;
+      if (node) {
+        node.isExpanded = !node.isExpanded;
+      }
+    }
   }
 }

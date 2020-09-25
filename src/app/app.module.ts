@@ -22,6 +22,7 @@ import { NzTreeModule } from 'ng-zorro-antd/tree';
 import { TreeDemoComponent } from './tree-demo/tree-demo.component';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { TableDemoComponent } from './table-demo/table-demo.component';
+import { NzInputModule } from 'ng-zorro-antd/input';
 
 
 registerLocaleData(en);
@@ -46,7 +47,8 @@ registerLocaleData(en);
     HeaderModule,
     PptListModule,
     NzTreeModule,
-    NzTableModule
+    NzTableModule,
+    NzInputModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

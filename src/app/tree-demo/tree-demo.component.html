@@ -1,9 +1,21 @@
+<nz-input-group [nzSuffix]="suffixIcon">
+  <input type="text" nz-input placeholder="Search" [(ngModel)]="searchValue" />
+</nz-input-group>
+<ng-template #suffixIcon>
+  <i nz-icon nzType="search"></i>
+</ng-template>
 <nz-tree
   [nzData]="nodes"
   nzCheckable
-  nzMultiple
+  [nzSearchValue]="searchValue"
   (nzClick)="nzEvent($event)"
   (nzExpandChange)="nzEvent($event)"
-  (nzCheckBoxChange)="nzEvent($event)"
+  (nzSearchValueChange)="nzEvent($event)"
+  [nzTreeTemplate]="nzTreeTemplate"
 >
 </nz-tree>
+<ng-template #nzTreeTemplate let-node let-origin="origin">
+  <span class="custom-node">
+    <span class="folder-name">{{ node.title }}</span>
+  </span>
+</ng-template>
