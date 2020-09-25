@@ -3,31 +3,14 @@ import { NzFormatEmitEvent } from 'ng-zorro-antd/tree';
 
 @Component({
   selector: 'app-tree-demo',
-  template: `
-    <nz-tree
-      [nzData]="nodes"
-      nzCheckable
-      nzMultiple
-      [nzCheckedKeys]="defaultCheckedKeys"
-      [nzExpandedKeys]="defaultExpandedKeys"
-      [nzSelectedKeys]="defaultSelectedKeys"
-      (nzClick)="nzEvent($event)"
-      (nzExpandChange)="nzEvent($event)"
-      (nzCheckBoxChange)="nzEvent($event)"
-    >
-    </nz-tree>
-  `
+  templateUrl: './tree-demo.component.html',
+  styleUrls: ['./tree-demo.component.scss']
 })
 export class TreeDemoComponent {
-  defaultCheckedKeys = ['0-0-0'];
-  defaultSelectedKeys = ['0-0-0'];
-  defaultExpandedKeys = ['0-0', '0-0-0', '0-0-1'];
-
   nodes = [
     {
       title: '0-0',
       key: '0-0',
-      expanded: true,
       children: [
         {
           title: '0-0-0',
