@@ -18,12 +18,13 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { CatDropdownComponent } from './cat-dropdown/cat-dropdown.component';
 import { HeaderModule } from './header/header.module';
 import { PptListModule } from './ppt-list/ppt-list.module';
-import { NzTreeModule } from 'ng-zorro-antd/tree';
+// import { NzTreeModule } from 'ng-zorro-antd/tree';
 import { TreeDemoComponent } from './tree-demo/tree-demo.component';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { TableDemoComponent } from './table-demo/table-demo.component';
 import { NzInputModule } from 'ng-zorro-antd/input';
-import { ClarityModule } from '@clr/angular';
+// import { ClarityModule } from '@clr/angular';
+import { BsTreeDemoComponent } from './bs-tree-demo/bs-tree-demo.component';
 
 
 registerLocaleData(en);
@@ -33,7 +34,8 @@ registerLocaleData(en);
     AppComponent,
     CatDropdownComponent,
     TreeDemoComponent,
-    TableDemoComponent
+    TableDemoComponent,
+    BsTreeDemoComponent
   ],
   imports: [
     BrowserModule,
@@ -47,10 +49,10 @@ registerLocaleData(en);
     NzIconModule,
     HeaderModule,
     PptListModule,
-    NzTreeModule,
+    // NzTreeModule,
     NzTableModule,
     NzInputModule,
-    ClarityModule
+    // ClarityModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
