@@ -1,5 +1,5 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
 interface ItemData {
   id: number;
@@ -8,17 +8,39 @@ interface ItemData {
   address: string;
 }
 
+
+
 @Component({
   selector: 'app-table-demo',
   templateUrl: './table-demo.component.html',
   styleUrls: ['./table-demo.component.scss']
 })
 export class TableDemoComponent implements OnInit {
+
+  @ViewChild('rowSelectionTable') listTable;
+
+  get searchValue() {
+    return this._searchValue;
+  }
+  set searchValue(val) {
+    // console.log(this.listTable);
+    this._searchValue = val;
+    if (!val) {
+      this.listOfData = this.dataSrc;
+    }
+    this.listOfData = this.dataSrc
+      .filter(d => d.name.includes(val));
+
+  }
   checked = false;
   indeterminate = false;
   listOfCurrentPageData: ItemData[] = [];
   listOfData: ItemData[] = [];
   setOfCheckedId = new Set<number>();
+  _searchValue = '';
+  dataSrc;
+
+
 
   updateCheckedSet(id: number, checked: boolean): void {
     if (checked) {
@@ -49,7 +71,7 @@ export class TableDemoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.listOfData = new Array(200).fill(0).map((_, index) => {
+    this.dataSrc = new Array(30).fill(0).map((_, index) => {
       return {
         id: index,
         name: `Edward King ${index}`,
@@ -57,6 +79,7 @@ export class TableDemoComponent implements OnInit {
         address: `London, Park Lane no. ${index}`
       };
     });
+    this.listOfData = this.dataSrc;
   }
 }
 

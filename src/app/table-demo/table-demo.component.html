@@ -1,8 +1,16 @@
+<nz-input-group [nzSuffix]="suffixIcon">
+  <input type="text" nz-input placeholder="Search" [(ngModel)]="searchValue" />
+</nz-input-group>
+<ng-template #suffixIcon>
+  <i nz-icon nzType="search"></i>
+</ng-template>
+
 <nz-table
   #rowSelectionTable
   nzShowSizeChanger
   [nzData]="listOfData"
   (nzCurrentPageDataChange)="onCurrentPageDataChange($event)"
+  [nzFrontPagination]="false"
 >
   <thead>
     <tr>
