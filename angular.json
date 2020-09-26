@@ -33,9 +33,9 @@
               }
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.css",
               "node_modules/@clr/icons/clr-icons.min.css",
               "node_modules/@clr/ui/clr-ui.min.css",
-              "node_modules/bootstrap/dist/css/bootstrap.css",
               "node_modules/bootstrap-select/dist/css/bootstrap-select.css",
               "src/theme.less",
               "src/styles.scss"

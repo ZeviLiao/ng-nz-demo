@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
 
   public msg: string;
   ngOnInit() {
-    $('[data-toggle="popover"]').popover();
+    // $('[data-toggle="popover"]').popover();
   }
 
   callApi() {
