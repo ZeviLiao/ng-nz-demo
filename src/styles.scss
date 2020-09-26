@@ -1,5 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
 
 .tb-table .ant-tree .ant-tree-node-content-wrapper {
-    width: 100%;
+  width: 100%;
+}
+
+.my {
+  padding: 50px;
+  .treeview-container .row-item {
+    display: flex;
+  }
+
+  input[type="radio"],
+  input[type="checkbox"] {
+    margin-right: 5px;
+  }
+
+  .treeview-container .row-item .bi {
+    margin-right: 5px;
+  }
 }

@@ -25,7 +25,8 @@ import { TableDemoComponent } from './table-demo/table-demo.component';
 import { NzInputModule } from 'ng-zorro-antd/input';
 // import { ClarityModule } from '@clr/angular';
 import { BsTreeDemoComponent } from './bs-tree-demo/bs-tree-demo.component';
-
+import { TreeviewModule } from 'ngx-treeview';
+import { BookComponent } from './book/book.component';
 
 registerLocaleData(en);
 
@@ -35,7 +36,8 @@ registerLocaleData(en);
     CatDropdownComponent,
     TreeDemoComponent,
     TableDemoComponent,
-    BsTreeDemoComponent
+    BsTreeDemoComponent,
+    BookComponent
   ],
   imports: [
     BrowserModule,
@@ -53,6 +55,7 @@ registerLocaleData(en);
     NzTableModule,
     NzInputModule,
     // ClarityModule,
+    TreeviewModule.forRoot()
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
