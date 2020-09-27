@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, OnDestroy } from '@angular/core';
 import { ITreeOptions, TreeModel, TreeNode } from '@circlon/angular-tree-component';
 
 @Component({
@@ -6,7 +6,7 @@ import { ITreeOptions, TreeModel, TreeNode } from '@circlon/angular-tree-compone
   templateUrl: './tree-demo.component.html',
   styleUrls: ['./tree-demo.component.scss']
 })
-export class TreeDemoComponent implements AfterViewInit {
+export class TreeDemoComponent implements AfterViewInit, OnDestroy {
 
   @ViewChild('tree') treeComponent;
 
@@ -90,16 +90,25 @@ export class TreeDemoComponent implements AfterViewInit {
   ngAfterViewInit() {
     this.treeComponent.treeModel.subscribeToState((state: any) => { // ITreeState does not contain selectedLeafNodeIds
 
-      console.log(state);
-      console.log(this.treeComponent.treeModel.selectedLeafNodeIds);
+      // console.log(state);
+      // console.log(this.treeComponent.treeModel.selectedLeafNodeIds);
 
       // drop the unwanted prototypes
       const selected = Object.assign({}, this.treeComponent.treeModel.selectedLeafNodeIds);
-      console.log(selected);
+      const arr = [];
+      for (const [key, value] of Object.entries(selected)) {
+        if (value) { arr.push(key); }
+      }
+      console.log(arr);
+
     });
   }
 
+  ngOnDestroy() {
+    this.treeComponent.treeModel.unSubscribeToState();
+  }
 }
+
 function fuzzysearch(needle: string, haystack: string) {
   const haystackLC = haystack.toLowerCase();
   const needleLC = needle.toLowerCase();
