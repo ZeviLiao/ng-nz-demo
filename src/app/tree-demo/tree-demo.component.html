@@ -5,28 +5,11 @@
   <i nz-icon nzType="search"></i>
 </ng-template>
 
-<div class="tb-table">
-  <!-- <nz-tree
-    [nzData]="dispNodes"
-    nzCheckable
-    [nzSearchValue]="searchValue"
-    (nzClick)="nzEvent($event)"
-    (nzExpandChange)="nzEvent($event)"
-    (nzSearchValueChange)="nzEvent($event)"
-    [nzTreeTemplate]="nzTreeTemplate"
-  >
-  </nz-tree> -->
-</div>
 
-<ng-template #nzTreeTemplate let-node let-origin="origin">
-  <div class="custom-tree-node tb-tr">
-    <span>
-      <span class="tb-td">{{ node.title }}</span>
-    </span>
-    <span>
-      <span class="tb-td">{{ node.title }}</span>
-      <span class="tb-td">{{ node.title }}</span>
-      <span class="tb-td">{{ node.title }}</span>
-    </span>
-  </div>
-</ng-template>
+<h2>Filter</h2>
+    <input id="filter" #filter (keyup)="tree.treeModel.filterNodes(filter.value)" placeholder="filter nodes"/>
+    <button (click)="tree.treeModel.clearFilter()">Clear Filter</button>
+    <tree-root #tree [focused]="true" [options]="options" [nodes]="nodes"></tree-root>
+    <input id="filter2" #filter2 (keyup)="tree.treeModel.filterNodes(filter2.value, false)" placeholder="filter nodes"/>
+    <h3>Filter By Function (Fuzzy Search)</h3>
+    <input id="filter3" #filter3 (keyup)="filterFn(filter3.value, tree.treeModel)" placeholder="filter nodes by fuzzy search"/>

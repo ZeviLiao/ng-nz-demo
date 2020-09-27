@@ -1,100 +1,74 @@
 import { Component, OnInit } from '@angular/core';
-import { NzFormatEmitEvent, NzTreeNode } from 'ng-zorro-antd/tree';
-
-function search(array, title) {
-  const s = (r, { children, ...object }) => {
-    if (object.title.includes(title)) {
-      r.push({ object, children: [] });
-      return r;
-    }
-    children = children.reduce(s, []);
-    if (children.length) { r.push({ ...object, children }); }
-    return r;
-  };
-  return array.reduce(s, []);
-}
+import { ITreeOptions, TreeModel, TreeNode } from '@circlon/angular-tree-component';
 
 @Component({
   selector: 'app-tree-demo',
   templateUrl: './tree-demo.component.html',
   styleUrls: ['./tree-demo.component.scss']
 })
-export class TreeDemoComponent implements OnInit {
+export class TreeDemoComponent {
 
-  searchValue = '';
+  options: ITreeOptions = {
+    useCheckbox: true
+  };
   nodes = [
     {
-      title: '0-0',
-      key: '0-0',
+      name: 'North America',
       children: [
-        {
-          title: '0-0-0',
-          key: '0-0-0',
-          children: [
-            { title: '0-0-0-0', key: '0-0-0-0', isLeaf: true, children: [] },
-            { title: '0-0-0-1', key: '0-0-0-1', isLeaf: true, children: [] },
-            { title: '0-0-0-2', key: '0-0-0-2', isLeaf: true, children: [] }
-          ]
-        },
-        {
-          title: '0-0-1',
-          key: '0-0-1',
-          children: [
-            { title: '0-0-1-0', key: '0-0-1-0', isLeaf: true, children: [] },
-            { title: '0-0-1-1', key: '0-0-1-1', isLeaf: true, children: [] },
-            { title: '0-0-1-2', key: '0-0-1-2', isLeaf: true, children: [] }
-          ]
-        },
-        {
-          title: '0-0-2',
-          key: '0-0-2',
-          isLeaf: true,
-          children: []
-        }
+        { name: 'United States', children: [
+          {name: 'New York'},
+          {name: 'California'},
+          {name: 'Florida'}
+        ] },
+        { name: 'Canada' }
       ]
     },
     {
-      title: '0-1',
-      key: '0-1',
+      name: 'South America',
       children: [
-        { title: '0-1-0-0', key: '0-1-0-0', isLeaf: true, children: [] },
-        { title: '0-1-0-1', key: '0-1-0-1', isLeaf: true, children: [] },
-        { title: '0-1-0-2', key: '0-1-0-2', isLeaf: true, children: [] }
+        { name: 'Argentina', children: [] },
+        { name: 'Brazil' }
       ]
     },
     {
-      title: '0-2',
-      key: '0-2',
-      isLeaf: true,
-      children: []
+      name: 'Europe',
+      children: [
+        { name: 'England' },
+        { name: 'Germany' },
+        { name: 'France' },
+        { name: 'Italy' },
+        { name: 'Spain' }
+      ]
     }
   ];
 
-  get dispNodes() {
-    if (this.searchValue) {
-      const nodes = search(this.nodes, this.searchValue);
-      return [...nodes];
-    } else {
-      return [...this.nodes];
-    }
+  filterFn(value: string, treeModel: TreeModel) {
+    treeModel.filterNodes((node: TreeNode) => fuzzysearch(value, node.data.name));
   }
 
-  ngOnInit(): void {
-  }
+}
+function fuzzysearch(needle: string, haystack: string) {
+  const haystackLC = haystack.toLowerCase();
+  const needleLC = needle.toLowerCase();
 
-  nzEvent(event: NzFormatEmitEvent): void {
-    console.log(event);
-  }
+  const hlen = haystack.length;
+  const nlen = needleLC.length;
 
-  openFolder(data: NzTreeNode | NzFormatEmitEvent): void {
-    // do something if u want
-    if (data instanceof NzTreeNode) {
-      data.isExpanded = !data.isExpanded;
-    } else {
-      const node = data.node;
-      if (node) {
-        node.isExpanded = !node.isExpanded;
+  if (nlen > hlen) {
+    return false;
+  }
+  if (nlen === hlen) {
+    return needleLC === haystackLC;
+  }
+  outer: for (let i = 0, j = 0; i < nlen; i++) {
+    const nch = needleLC.charCodeAt(i);
+
+    while (j < hlen) {
+      if (haystackLC.charCodeAt(j++) === nch) {
+        continue outer;
       }
     }
+    return false;
   }
+  return true;
 }

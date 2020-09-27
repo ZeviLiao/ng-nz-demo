@@ -25,7 +25,7 @@ import { TableDemoComponent } from './table-demo/table-demo.component';
 import { NzInputModule } from 'ng-zorro-antd/input';
 // import { ClarityModule } from '@clr/angular';
 import { BsTreeDemoComponent } from './bs-tree-demo/bs-tree-demo.component';
-
+import { TreeModule } from '@circlon/angular-tree-component';
 
 registerLocaleData(en);
 
@@ -53,6 +53,7 @@ registerLocaleData(en);
     NzTableModule,
     NzInputModule,
     // ClarityModule,
+    TreeModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
