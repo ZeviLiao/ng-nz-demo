@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { NzFormatEmitEvent, NzTreeNode } from 'ng-zorro-antd/tree';
+import { Component } from '@angular/core';
+import { ClrSelectedState } from '@clr/angular';
 
-function search(array, title) {
-  const s = (r, { children, ...object }) => {
-    if (object.title.includes(title)) {
-      r.push({ object, children: [] });
+function search(array, name) {
+  const s = (r, { files, ...object }) => {
+    if (object.name.includes(name)) {
+      r.push({ object, files: [] });
       return r;
     }
-    children = children.reduce(s, []);
-    if (children.length) { r.push({ ...object, children }); }
+    files = files.reduce(s, []);
+    if (files.length) { r.push({ ...object, files }); }
     return r;
   };
   return array.reduce(s, []);
@@ -19,82 +19,108 @@ function search(array, title) {
   templateUrl: './tree-demo.component.html',
   styleUrls: ['./tree-demo.component.scss']
 })
-export class TreeDemoComponent implements OnInit {
-
+export class TreeDemoComponent {
   searchValue = '';
-  nodes = [
+  root = [
     {
-      title: '0-0',
-      key: '0-0',
-      children: [
+      name: 'src',
+      files: [
         {
-          title: '0-0-0',
-          key: '0-0-0',
-          children: [
-            { title: '0-0-0-0', key: '0-0-0-0', isLeaf: true, children: [] },
-            { title: '0-0-0-1', key: '0-0-0-1', isLeaf: true, children: [] },
-            { title: '0-0-0-2', key: '0-0-0-2', isLeaf: true, children: [] }
+          name: 'app',
+          files: [
+            {
+              name: 'app.component.html', files: []
+            },
+            {
+              name: 'app.component.ts', files: []
+            },
+            {
+              name: 'app.module.ts', files: []
+            },
+            {
+              name: 'app.routing.ts', files: []
+            }
           ]
         },
         {
-          title: '0-0-1',
-          key: '0-0-1',
-          children: [
-            { title: '0-0-1-0', key: '0-0-1-0', isLeaf: true, children: [] },
-            { title: '0-0-1-1', key: '0-0-1-1', isLeaf: true, children: [] },
-            { title: '0-0-1-2', key: '0-0-1-2', isLeaf: true, children: [] }
+          name: 'environments',
+          files: [
+            {
+              name: 'environments.prod.ts', files: []
+
+            },
+            {
+              name: 'environment.ts', files: []
+            }
           ]
         },
         {
-          title: '0-0-2',
-          key: '0-0-2',
-          isLeaf: true,
-          children: []
+          name: 'index.html', files: []
+        },
+        {
+          name: 'main.ts', files: []
         }
       ]
     },
     {
-      title: '0-1',
-      key: '0-1',
-      children: [
-        { title: '0-1-0-0', key: '0-1-0-0', isLeaf: true, children: [] },
-        { title: '0-1-0-1', key: '0-1-0-1', isLeaf: true, children: [] },
-        { title: '0-1-0-2', key: '0-1-0-2', isLeaf: true, children: [] }
-      ]
+      name: 'package.json', files: []
     },
     {
-      title: '0-2',
-      key: '0-2',
-      isLeaf: true,
-      children: []
+      name: 'tsconfig.json', files: []
     }
   ];
 
+  getChildren = (folder) => folder.files;
+
   get dispNodes() {
     if (this.searchValue) {
-      const nodes = search(this.nodes, this.searchValue);
-      return [...nodes];
+      // search(this.root, this.searchValue);
+      const nodes = [
+        {
+          name: 'src',
+          files: [
+            {
+              name: 'app',
+              files: [
+                {
+                  name: 'app.component.html', files: []
+                },
+                {
+                  name: 'app.component.ts', files: []
+                },
+                {
+                  name: 'app.module.ts', files: []
+                },
+                {
+                  name: 'app.routing.ts', files: []
+                }
+              ]
+            },
+            {
+              name: 'environments',
+              files: [
+                {
+                  name: 'environments.prod.ts', files: []
+
+                },
+                {
+                  name: 'environment.ts', files: []
+                }
+              ]
+            },
+            {
+              name: 'index.html', files: []
+            },
+            {
+              name: 'main.ts', files: []
+            }
+          ]
+        }
+      ];
+      return nodes;
     } else {
-      return [...this.nodes];
+      return this.root;
     }
   }
 
-  ngOnInit(): void {
-  }
-
-  nzEvent(event: NzFormatEmitEvent): void {
-    console.log(event);
-  }
-
-  openFolder(data: NzTreeNode | NzFormatEmitEvent): void {
-    // do something if u want
-    if (data instanceof NzTreeNode) {
-      data.isExpanded = !data.isExpanded;
-    } else {
-      const node = data.node;
-      if (node) {
-        node.isExpanded = !node.isExpanded;
-      }
-    }
-  }
 }
