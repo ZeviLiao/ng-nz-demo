@@ -28,6 +28,8 @@ import { BsTreeDemoComponent } from './bs-tree-demo/bs-tree-demo.component';
 import { TreeModule } from '@circlon/angular-tree-component';
 import { StepComponent } from './step/step.component';
 import { NzStepsModule } from 'ng-zorro-antd/steps';
+import { StepDialogComponent } from './step-dialog/step-dialog.component';
+import { NzModalModule } from 'ng-zorro-antd/modal';
 
 registerLocaleData(en);
 
@@ -38,7 +40,8 @@ registerLocaleData(en);
     TreeDemoComponent,
     TableDemoComponent,
     BsTreeDemoComponent,
-    StepComponent
+    StepComponent,
+    StepDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +60,8 @@ registerLocaleData(en);
     NzInputModule,
     // ClarityModule,
     TreeModule,
-    NzStepsModule
+    NzStepsModule,
+    NzModalModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
