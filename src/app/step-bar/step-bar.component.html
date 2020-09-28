@@ -1,41 +1,7 @@
-<app-step-bar-header [curStateIndex]="curStateIndex"></app-step-bar-header>
-
 <div>
-  <div *ngIf="currentStep === 'step-1'">1 start connect</div>
-  <div *ngIf="currentStep === 'step-2'">
-    2 pick device /
-    <input type="checkbox" [(ngModel)]="devices" />device
-  </div>
-  <div *ngIf="currentStep === 'step-2-1'">
-    processing zipping file / transfer file
-  </div>
-  <div *ngIf="currentStep === 'step-3'">
-    <!-- done -->
-    <div>done - partial / all</div>
-  </div>
-  <div *ngIf="currentStep === 'step-3-1'">
-    <!-- error -->
-    <div>err</div>
-  </div>
-</div>
-
-<div class="step-footer">
-  <div *ngIf="currentStep === 'step-1'">
-    <button (click)="next()">connect</button>
-  </div>
-  <div *ngIf="currentStep === 'step-2'">
-    <button [disabled]="!devices" (click)="process()">distribute</button>
-  </div>
-  <div *ngIf="currentStep === 'step-2-1'">
-    <button (click)="cancelProcess()">cancel</button>
-  </div>
-  <div *ngIf="currentStep === 'step-3'">
-    <!-- done -->
-    <button (click)="alert('exit')">done</button>
-  </div>
-  <div *ngIf="currentStep === 'step-3-1'">
-    <!-- error -->
-    <button (click)="alert('exit')">exit</button>
-    <button (click)="navStep(1); process()">try again</button>
-  </div>
+  <span [ngClass]="{ process: curStateIndex > -1 }">step 1</span>
+  <span [ngClass]="{ process: curStateIndex > 0 }">....</span>
+  <span [ngClass]="{ process: curStateIndex > 0 }">step 2</span>
+  <span [ngClass]="{ process: curStateIndex > 1 }">....</span>
+  <span [ngClass]="{ process: curStateIndex > 2 }">step 3</span>
 </div>

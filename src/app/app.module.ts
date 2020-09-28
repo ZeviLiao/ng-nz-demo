@@ -26,12 +26,11 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 // import { ClarityModule } from '@clr/angular';
 import { BsTreeDemoComponent } from './bs-tree-demo/bs-tree-demo.component';
 import { TreeModule } from '@circlon/angular-tree-component';
-import { StepComponent } from './step/step.component';
 import { NzStepsModule } from 'ng-zorro-antd/steps';
 import { StepDialogComponent } from './step-dialog/step-dialog.component';
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { StepComponent } from './step/step.component';
 import { StepBarComponent } from './step-bar/step-bar.component';
-import { StepBarHeaderComponent } from './step-bar-header/step-bar-header.component';
 
 registerLocaleData(en);
 
@@ -45,7 +44,6 @@ registerLocaleData(en);
     StepComponent,
     StepDialogComponent,
     StepBarComponent,
-    StepBarHeaderComponent
   ],
   imports: [
     BrowserModule,

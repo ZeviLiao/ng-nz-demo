@@ -1,21 +1,77 @@
+<app-step-bar [curStateIndex]="curStateIndex"></app-step-bar>
 
-  <nz-steps [nzCurrent]="current">
-    <nz-step nzTitle="Finished"></nz-step>
-    <nz-step nzTitle="In Progress"></nz-step>
-    <nz-step nzTitle="In Progress"></nz-step>
-    <nz-step nzTitle="Waiting"></nz-step>
-  </nz-steps>
+<div class="steps">
+  <div *ngIf="currentStep === 'step-1'">
+    1 start connect
 
-  <div class="steps-content">{{ index }}</div>
-  <div class="steps-action">
-    <button nz-button nzType="default" (click)="pre()" *ngIf="current > 0">
-      <span>Previous</span>
-    </button>
-    <button nz-button nzType="default" (click)="next()" *ngIf="current < 3">
-      <span>Next</span>
-    </button>
-    <button nz-button nzType="primary" (click)="done()" *ngIf="current === 3">
-      <span>Done</span>
-    </button>
+    <div class="content">
+      <div class="text">
+        <h3>尚未連線至女媧伺服器</h3>
+        <p>請在您確認登入狀態與網路連線後，點擊按鈕開始連線。</p>
+      </div>
+      <img src="assets/images/nuwa/steps/step-1.png" />
+    </div>
   </div>
+  <div *ngIf="currentStep === 'step-2'">
+    2 pick device /
+    <input type="checkbox" [(ngModel)]="devices" />device
+  </div>
+  <div *ngIf="currentStep === 'step-2-1'">
+    processing zipping file / transfer file
+    <div class="content">
+      <div class="text">
+        <h3>派發檔案產生中...</h3>
+        <p>派發檔案正在努力產生 000% 請稍等一下喔 &gt; &lt;</p>
+      </div>
+      <img src="assets/images/nuwa/steps/step-2-1.png" />
+    </div>
+  </div>
+  <div *ngIf="currentStep === 'step-3'">
+    <!-- done -->
+    <div>done - partial / all</div>
+    <div class="content">
+      <div class="text">
+        <h3>機器人收到檔案！</h3>
+        <p>
+          檔案已經成功派發到機器人上，您可以前往機器人上查看檔案下載狀況啦～
+        </p>
+      </div>
+      <img src="assets/images/nuwa/steps/step-3.png" />
+    </div>
+  </div>
+  <div *ngIf="currentStep === 'step-3-1'">
+    <!-- error -->
+    <div>err</div>
+    <div class="content">
+      <div class="text">
+        <h3>Oops..好像出錯了</h3>
+        <p>
+          檔案沒有派發成功<br />
+          請檢查網路連線狀態，再次確認是否已和凱比連線後，重新派發一次檔案。
+        </p>
+      </div>
+      <img src="assets/images/nuwa/steps/step-3-1.png" />
+    </div>
+  </div>
+</div>
 
+<div class="step-footer">
+  <div *ngIf="currentStep === 'step-1'">
+    <button (click)="next()">connect</button>
+  </div>
+  <div *ngIf="currentStep === 'step-2'">
+    <button [disabled]="!devices" (click)="process()">distribute</button>
+  </div>
+  <div *ngIf="currentStep === 'step-2-1'">
+    <button (click)="cancelProcess()">cancel</button>
+  </div>
+  <div *ngIf="currentStep === 'step-3'">
+    <!-- done -->
+    <button (click)="alert('exit')">done</button>
+  </div>
+  <div *ngIf="currentStep === 'step-3-1'">
+    <!-- error -->
+    <button (click)="alert('exit')">exit</button>
+    <button (click)="navStep(1); process()">try again</button>
+  </div>
+</div>
