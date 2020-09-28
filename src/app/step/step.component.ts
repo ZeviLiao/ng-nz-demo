@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-step',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StepComponent implements OnInit {
 
-  constructor() { }
+  confirmModal?: NzModalRef; // For testing by now
+
+  constructor(private modal: NzModalService) {}
   get currentStep() {
     return this.stateList[this.curStateIndex];
   }
@@ -61,6 +64,18 @@ export class StepComponent implements OnInit {
 
   alert(msg) {
     alert(msg);
+  }
+
+  showConfirm(): void {
+    this.confirmModal = this.modal.confirm({
+      nzTitle: 'Do you Want to delete these items?',
+      nzContent: 'When clicked the OK button, this dialog will be closed after 1 second',
+      nzOnOk: () =>
+        // new Promise((resolve, reject) => {
+        //   setTimeout(Math.random() > 0.5 ? resolve : reject, 1000);
+        // }).catch(() => console.log('Oops errors!'))
+        console.log('ok')
+    });
   }
 
 }
