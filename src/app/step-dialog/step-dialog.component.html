@@ -7,6 +7,8 @@
   (nzOnCancel)="handleCancel()"
   (nzOnOk)="handleOk()"
   [nzWidth]="720"
+  [nzFooter]="null"
+  (nzAfterOpen)="openDialog()"
 >
-  <app-step></app-step>
+  <app-step (closeDailog)="closeDailog($event)" [curStateIndex]="0"></app-step>
 </nz-modal>

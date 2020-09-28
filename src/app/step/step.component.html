@@ -70,11 +70,11 @@
   </div>
   <div *ngIf="currentStep === 'step-3'">
     <!-- done -->
-    <button (click)="alert('exit')">done</button>
+    <button (click)="exit()">done</button>
   </div>
   <div *ngIf="currentStep === 'step-3-1'">
     <!-- error -->
-    <button (click)="alert('exit')">exit</button>
+    <button (click)="exit()">exit</button>
     <button (click)="navStep(1); process()">try again</button>
   </div>
 </div>

@@ -13,6 +13,11 @@ export class StepDialogComponent implements OnInit, OnDestroy {
 
   }
 
+  // constructor(modal: NzModalService) {
+  //   const ref: NzModalRef = modal.info();
+  //   ref.close(); // Or ref.destroy(); This dialog will be destroyed directly
+  // }
+
   isVisible = false;
 
   ngOnInit(): void {
@@ -29,6 +34,10 @@ export class StepDialogComponent implements OnInit, OnDestroy {
     this.isVisible = true;
   }
 
+  openDialog(): void {
+    console.log('open');
+  }
+
   handleOk(): void {
     console.log('Button ok clicked!');
     this.isVisible = false;
@@ -37,6 +46,9 @@ export class StepDialogComponent implements OnInit, OnDestroy {
   handleCancel(): void {
     console.log('Button cancel clicked!');
     this.isVisible = false;
+  }
+  closeDailog(event) {
+    this.isVisible = event;
   }
 
 }
