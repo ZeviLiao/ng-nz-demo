@@ -30,6 +30,7 @@ import { StepComponent } from './step/step.component';
 import { NzStepsModule } from 'ng-zorro-antd/steps';
 import { StepDialogComponent } from './step-dialog/step-dialog.component';
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { StepBarComponent } from './step-bar/step-bar.component';
 
 registerLocaleData(en);
 
@@ -41,7 +42,8 @@ registerLocaleData(en);
     TableDemoComponent,
     BsTreeDemoComponent,
     StepComponent,
-    StepDialogComponent
+    StepDialogComponent,
+    StepBarComponent
   ],
   imports: [
     BrowserModule,
