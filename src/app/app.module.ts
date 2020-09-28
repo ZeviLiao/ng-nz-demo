@@ -26,6 +26,8 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 // import { ClarityModule } from '@clr/angular';
 import { BsTreeDemoComponent } from './bs-tree-demo/bs-tree-demo.component';
 import { TreeModule } from '@circlon/angular-tree-component';
+import { StepComponent } from './step/step.component';
+import { NzStepsModule } from 'ng-zorro-antd/steps';
 
 registerLocaleData(en);
 
@@ -35,7 +37,8 @@ registerLocaleData(en);
     CatDropdownComponent,
     TreeDemoComponent,
     TableDemoComponent,
-    BsTreeDemoComponent
+    BsTreeDemoComponent,
+    StepComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +56,8 @@ registerLocaleData(en);
     NzTableModule,
     NzInputModule,
     // ClarityModule,
-    TreeModule
+    TreeModule,
+    NzStepsModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
