@@ -84,7 +84,11 @@ export class TreeDemoComponent implements AfterViewInit, OnDestroy {
   ];
 
   filterFn(value: string, treeModel: TreeModel) {
-    treeModel.filterNodes((node: TreeNode) => fuzzysearch(value, node.data.name));
+    this.unSelectAllNodes();
+    treeModel.filterNodes((node: TreeNode) => {
+      return node.data.name.toLowerCase().includes(value);
+    });
+    // treeModel.filterNodes((node: TreeNode) => fuzzysearch(value, node.data.name));
   }
 
   ngAfterViewInit() {
@@ -106,6 +110,22 @@ export class TreeDemoComponent implements AfterViewInit, OnDestroy {
 
   ngOnDestroy() {
     this.treeComponent.treeModel.unSubscribeToState();
+  }
+
+  // selectAllNodes() {
+  //   this.treeComponent.treeModel.doForAll((node: TreeNode) => node.setIsSelected(true));
+  //   //  firstNode.setIsSelected(true);
+
+  // }
+  // selectAllNodes() {
+  //   this.treeComponent.treeModel.doForAll((node: TreeNode) => node.setIsSelected(true));
+  //   //  firstNode.setIsSelected(true);
+
+  // }
+  unSelectAllNodes() {
+    this.treeComponent.treeModel.doForAll((node: TreeNode) => node.setIsSelected(false));
+    //  firstNode.setIsSelected(true);
+
   }
 }
 
