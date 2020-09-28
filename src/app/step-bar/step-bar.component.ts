@@ -8,6 +8,9 @@ import { Component, OnInit } from '@angular/core';
 export class StepBarComponent implements OnInit {
 
   constructor() { }
+  get currentStep() {
+    return this.stateList[this.curStateIndex];
+  }
   stateList = ['step-1',
     'step-2', 'step-2-1',
     'step-3', 'step-3-1'];
@@ -15,10 +18,8 @@ export class StepBarComponent implements OnInit {
   devices = false;
 
   curStateIndex = 0;
-  get currentStep() {
-    return this.stateList[this.curStateIndex];
-  }
 
+  timer;
 
   ngOnInit(): void {
 
@@ -42,13 +43,24 @@ export class StepBarComponent implements OnInit {
   }
 
   process() {
-    this.next();
+    // this.next();
+    this.navStep(2);
     console.log('zip/transfer');
-    setTimeout(() => {
+    this.timer = setTimeout(() => {
       console.log('done');
-      this.navStep(3);
-      // this.navStep(4); // error
-    }, 2000);
+      // this.navStep(3);
+      this.navStep(4); // error
+    }, 5000);
+  }
+
+  cancelProcess() {
+    clearTimeout(this.timer);
+    // this.prev();
+    this.navStep(1);
+  }
+
+  alert(msg) {
+    alert(msg);
   }
 
 }
