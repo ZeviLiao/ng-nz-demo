@@ -8,28 +8,25 @@ import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 })
 export class StepComponent implements OnInit {
 
-  confirmModal?: NzModalRef; // For testing by now
-
   constructor(private modal: NzModalService, private elRef: ElementRef) { }
   get currentStep() {
     return this.stateList[this.curStateIndex];
   }
+
+  confirmModal?: NzModalRef; // For testing by now
   stateList = ['step-1',
     'step-2', 'step-2-1',
     'step-3', 'step-3-1'];
 
   devices = false;
-
-
+  result = true;
+  timer;
 
   @Input()
   curStateIndex = 0;
 
-  timer;
-
   @Output()
   closeDailog: EventEmitter<boolean> = new EventEmitter<boolean>();
-
 
   ngOnInit(): void {
     const target = this.elRef.nativeElement.ownerDocument.body;
@@ -41,13 +38,13 @@ export class StepComponent implements OnInit {
     target.classList.remove('zevi');
   }
 
-
   next() {
     this.curStateIndex++;
     if (this.curStateIndex > this.stateList.length - 1) {
       this.curStateIndex = this.stateList.length - 1;
     }
   }
+
   prev() {
     this.curStateIndex--;
     if (this.curStateIndex === -1) {
@@ -68,12 +65,13 @@ export class StepComponent implements OnInit {
       // this.navStep(3);
       // this.navStep(4); // error
       return new Promise((resolve, reject) => {
-        setTimeout(() =>
-          (Math.random() > 0.5) ?
-            resolve(this.navStep(3)) :
-            reject(this.navStep(4))
-          , 1000
-        );
+        setTimeout(() => {
+          this.result = !this.result;
+          if (this.result) {
+            resolve(this.navStep(3));
+
+          } else { reject(this.navStep(4)); }
+        } , 1000);
       }).catch(() => console.log('Oops errors!'));
 
     }, 2000);
