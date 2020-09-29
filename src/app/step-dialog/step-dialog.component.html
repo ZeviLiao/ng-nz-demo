@@ -9,6 +9,12 @@
   [nzWidth]="720"
   [nzFooter]="null"
   (nzAfterOpen)="openDialog()"
+  [nzMaskClosable]="false"
+  [nzKeyboard]="false"
 >
-  <app-step (closeDailog)="closeDailog($event)" [curStateIndex]="0"></app-step>
+  <app-step
+    *ngIf="isVisible"
+    (closeDailog)="closeDailog($event)"
+    [curStateIndex]="0"
+  ></app-step>
 </nz-modal>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ElementRef } from '@angular/core';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 
 @Component({
@@ -10,7 +10,7 @@ export class StepComponent implements OnInit {
 
   confirmModal?: NzModalRef; // For testing by now
 
-  constructor(private modal: NzModalService) { }
+  constructor(private modal: NzModalService, private elRef: ElementRef) { }
   get currentStep() {
     return this.stateList[this.curStateIndex];
   }
@@ -32,7 +32,13 @@ export class StepComponent implements OnInit {
 
 
   ngOnInit(): void {
+    const target = this.elRef.nativeElement.ownerDocument.body;
+    target.classList.add('zevi');
+  }
 
+  ngOnDestroy(): void {
+    const target = this.elRef.nativeElement.ownerDocument.body;
+    target.classList.remove('zevi');
   }
 
 
