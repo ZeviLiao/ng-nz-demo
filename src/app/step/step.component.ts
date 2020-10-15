@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, ElementRef } from '@angular/core';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
+declare var bootbox: any;
 
 @Component({
   selector: 'app-step',
@@ -88,15 +89,18 @@ export class StepComponent implements OnInit {
   }
 
   showConfirm(): void {
-    this.confirmModal = this.modal.create({
-      nzTitle: 'Do you Want to delete these items?',
-      nzContent: 'When clicked the OK button, this dialog will be closed after 1 second',
-      nzOnOk: () =>
-        // new Promise((resolve, reject) => {
-        //   setTimeout(Math.random() > 0.5 ? resolve : reject, 1000);
-        // }).catch(() => console.log('Oops errors!'))
-        console.log('ok')
-    });
+    // this.confirmModal = this.modal.create({
+    //   nzTitle: 'Do you Want to delete these items?',
+    //   nzContent: 'When clicked the OK button, this dialog will be closed after 1 second',
+    //   nzOnOk: () =>
+    //     // new Promise((resolve, reject) => {
+    //     //   setTimeout(Math.random() > 0.5 ? resolve : reject, 1000);
+    //     // }).catch(() => console.log('Oops errors!'))
+    //     console.log('ok')
+    // });
+    bootbox.confirm('This is the default confirm!', function(result) {
+      console.log('This was logged in the callback: ' + result);
+  });
   }
 
 }

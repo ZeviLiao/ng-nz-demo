@@ -22,6 +22,7 @@
     "@ant-design/icons": "^4.2.2",
     "@circlon/angular-tree-component": "^10.0.0",
     "@webcomponents/custom-elements": "^1.4.2",
+    "bootbox": "^5.5.1",
     "bootstrap": "3.4.1",
     "bootstrap-select": "^1.13.18",
     "bootstrap-treeview": "^1.2.0",
