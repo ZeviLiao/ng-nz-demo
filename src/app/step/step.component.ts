@@ -31,6 +31,7 @@ export class StepComponent implements OnInit {
   timer;
   team = [];
   token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL2Rldi1hcGkubnV3YXJvYm90aWNzLmNvbSIsInN1YiI6ImF1dGguZGV2Lm51d2Fyb2JvdGljc3wxNzcxNjA3MzM3OTkiLCJhdWQiOiIyODk5MDk1OC1DQ0FFLTQ5QjktQjg2MS0wRDQyQTdENURERkUiLCJpYXQiOjE2MDI4MjgzMTYsImV4cCI6MTYwMzA4NzUxNiwianRpIjoiNDI4OWQ0YjItYTQ0YS00MTU0LTljZTctMWI3MmFhNzliNWQ1IiwiY29udGV4dCI6eyJ0eXBlIjoiYWNjZXNzIiwicHJvdmlkZXIiOiJuZXdOdXdhfHpldmlsaWFvQGdtYWlsLmNvbSJ9LCJzY29wZSI6InVhbXMgcm1zX3VzZXIgY29kZUxhYiBtYXRlcmlhbExpYnJheSBkZXZlbG9wVG9vbCBzbGlkZSBjb250ZW50RWRpdG9yIHNoYXJpbmdBY2NvdW50In0.DwjBbEilGCtJRWMfocp8uoxGZiBLj1-I9W9shMlg9A1p1fzeZWyzijQKRCQUmlDFKm7kDXJtrjQZAeYQliyfc4gB7H1zGiMEXevTuyDaQls4ATVF8dzmaG6-i_Gk3MHDhZVk9E_VkhCxpkPISfauRMRUQcBunLWhgk3m0XSTfXe7Jx-d43tWj7UL-4G3yr5MDyVAzDizZg8MOAqUPv_kfJmkctnJJdmUWyJsTTO7EPSSq8MAyhmRU286zwlmp-LngNsMqop4zP1lh10x29E8pbux-oa_s012XskwJ2hP5cSVXfddQJCDPej0vxV-vb8Qe4PdHSgBOSmJnkStFkj6vA';
+  customerId = 'NB1557903870927'; // "NB1557903870926",
   curCnnState = false;
 
   userId = '';
@@ -86,9 +87,7 @@ export class StepComponent implements OnInit {
         teachFeature,
       });
       this.connect();
-      if (this.curCnnState) {
-        this.next();
-      }
+
     } else {
       console.warn('未找到白名单权限');
     }
@@ -186,6 +185,10 @@ export class StepComponent implements OnInit {
       console.log('connectStatus:xx=>', payload);
       if (payload.status.state === 'reslove') {
         console.log('已登录');
+        this.curCnnState = true;
+        if (this.curCnnState) {
+          this.next();
+        }
       } else if (payload.status.state === 'reject') {
         console.log('未登录');
       } else if (payload.status.state === 'pending') {
