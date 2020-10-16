@@ -60,7 +60,7 @@
 
 <div class="step-footer">
   <div *ngIf="currentStep === 'step-1'">
-    <button (click)="next()">connect</button>
+    <button (click)="white()">connect</button>
   </div>
   <div *ngIf="currentStep === 'step-2'">
     <button [disabled]="!devices" (click)="process()">distribute</button>
