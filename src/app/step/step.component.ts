@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, ElementRef } from '@angular/core';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 declare var bootbox: any;
 declare var axios: any;
 declare global {
@@ -9,6 +11,11 @@ declare global {
 }
 const { WebSocketProccess } = window.nuwa;
 
+// const slideServerUrl = 'https://dev-slide-api.nuwarobotics.com/api-admin/v1' + '/presentations/2/distribute';
+const slideServerUrl = 'https://dev-slide-api.nuwarobotics.com/api-admin/v1' + '/presentations/2/file-url';
+
+
+
 @Component({
   selector: 'app-step',
   templateUrl: './step.component.html',
@@ -16,7 +23,10 @@ const { WebSocketProccess } = window.nuwa;
 })
 export class StepComponent implements OnInit {
 
-  constructor(private modal: NzModalService, private elRef: ElementRef) { }
+  constructor(
+    // private modal: NzModalService,
+    private elRef: ElementRef,
+    private httpClient: HttpClient) { }
   get currentStep() {
     return this.stateList[this.curStateIndex];
   }
@@ -33,6 +43,12 @@ export class StepComponent implements OnInit {
   token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL2Rldi1hcGkubnV3YXJvYm90aWNzLmNvbSIsInN1YiI6ImF1dGguZGV2Lm51d2Fyb2JvdGljc3wxNzcxNjA3MzM3OTkiLCJhdWQiOiIyODk5MDk1OC1DQ0FFLTQ5QjktQjg2MS0wRDQyQTdENURERkUiLCJpYXQiOjE2MDI4MjgzMTYsImV4cCI6MTYwMzA4NzUxNiwianRpIjoiNDI4OWQ0YjItYTQ0YS00MTU0LTljZTctMWI3MmFhNzliNWQ1IiwiY29udGV4dCI6eyJ0eXBlIjoiYWNjZXNzIiwicHJvdmlkZXIiOiJuZXdOdXdhfHpldmlsaWFvQGdtYWlsLmNvbSJ9LCJzY29wZSI6InVhbXMgcm1zX3VzZXIgY29kZUxhYiBtYXRlcmlhbExpYnJheSBkZXZlbG9wVG9vbCBzbGlkZSBjb250ZW50RWRpdG9yIHNoYXJpbmdBY2NvdW50In0.DwjBbEilGCtJRWMfocp8uoxGZiBLj1-I9W9shMlg9A1p1fzeZWyzijQKRCQUmlDFKm7kDXJtrjQZAeYQliyfc4gB7H1zGiMEXevTuyDaQls4ATVF8dzmaG6-i_Gk3MHDhZVk9E_VkhCxpkPISfauRMRUQcBunLWhgk3m0XSTfXe7Jx-d43tWj7UL-4G3yr5MDyVAzDizZg8MOAqUPv_kfJmkctnJJdmUWyJsTTO7EPSSq8MAyhmRU286zwlmp-LngNsMqop4zP1lh10x29E8pbux-oa_s012XskwJ2hP5cSVXfddQJCDPej0vxV-vb8Qe4PdHSgBOSmJnkStFkj6vA';
   customerId = 'NB1557903870927'; // "NB1557903870926",
   curCnnState = false;
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: this.token
+    })
+  };
 
   userId = '';
   webVersion = '0.0.10';
@@ -53,6 +69,7 @@ export class StepComponent implements OnInit {
       funcList: false,
     };
   robotClientIds = [];
+  robots = [];
   presentationId = '2';
   curName = '';
 
@@ -112,25 +129,31 @@ export class StepComponent implements OnInit {
     this.curStateIndex = index;
   }
 
-  process() {
-    // this.next();
+  async getAsyncZipData() {
+    const url = '';
+    return await this.httpClient.get<any>(
+      slideServerUrl, this.httpOptions
+    ).toPromise();
+    // console.log('No issues, I will wait until promise is resolved..');
+  }
+
+  async process() {
+    console.log('zevi', 'process');
+    debugger;
     this.navStep(2);
-    console.log('zip/transfer');
-    this.timer = setTimeout(() => {
-      console.log('done');
-      // this.navStep(3);
-      // this.navStep(4); // error
-      return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          this.result = !this.result;
-          if (this.result) {
-            resolve(this.navStep(3));
+    // pack and get zip file info.
+    const fileInfo = await this.getAsyncZipData();
+    console.log('zevi', fileInfo);
+    // this.next();
+    // get file info send file.
 
-          } else { reject(this.navStep(4)); }
-        }, 1000);
-      }).catch(() => console.log('Oops errors!'));
-
-    }, 2000);
+    const ok = await this.sendFile();
+    if (ok) {
+      debugger;
+      this.navStep(3);
+    } else {
+      this.navStep(4); // error
+    }
   }
 
   cancelProcess() {
@@ -180,6 +203,70 @@ export class StepComponent implements OnInit {
       });
   }
 
+  getDevice() {
+    console.log('getDevice');
+    this.ws.subscribe.getDevice((payload) => {
+      // console.log(payload, "getDevice:");
+      this.curName = payload.name;
+      if (payload.status.state === 'reslove') {
+        if (payload.name === 'white') {
+          // 白名单没有
+          console.log(payload.payload.data.list);
+          // get clinet ids
+          this.robotClientIds = payload.payload.data.list
+            .filter((flo) => /^0-/.test(flo.clientId))
+            .map((mo) => mo.clientId);
+
+          // show robots on screen
+          this.robots = payload.payload.data.list
+            .filter((flo) => /^0-/.test(flo.clientId));
+
+
+        } else if (payload.name === 'rms') {
+          console.log('zevi_devs', payload.payload.payload);
+          // console.log("这里是rms的设备列表 拥有群组概念");
+          this.robotClientIds = payload.payload.payload
+            .filter((grp) => grp.currentDeviceCount > 0)
+            .map((grp) => {
+              return grp.devices.map((d) => d.clientId);
+            })
+            .flat();
+        }
+        // console.log("getDevice_reslove:", this.robotClientIds, payload);
+      }
+    }); // name == rms 可携带参数 { page: xx, limit: xxx  } 分页查询设备
+  }
+
+  sendFile() {
+    console.log('sendFile');
+    const { /*presentationId,*/ robotClientIds } = this;
+
+    return new Promise((rev, rej) => {
+      this.ws.subscribe.sendFile(
+        (payload) => {
+          debugger;
+          console.log(payload, 'sendFile:');
+          // rev(true);
+          if (payload.status.state === 'reslove') {
+            // console.log(payload, 'sendFile_reslove:');
+            rev(true);
+          } else if (payload.status.state === 'reject') {
+            rev(false);
+          }
+        },
+        // { robotClientIds, presentationId }
+        {
+          url: 'ptt-2-1602560231286.zip', // destinationName url 和 to 为必填
+          to: robotClientIds,
+          md5: '0c75a73dfc458ab705e648ed5422765a',
+          size: 306153,
+        }
+      );
+
+    });
+
+  }
+
   connect() {
     const connectStatus = (payload: any) => {
       console.log('connectStatus:xx=>', payload);
@@ -188,6 +275,7 @@ export class StepComponent implements OnInit {
         this.curCnnState = true;
         if (this.curCnnState) {
           this.next();
+          this.getDevice();
         }
       } else if (payload.status.state === 'reject') {
         console.log('未登录');
@@ -203,10 +291,10 @@ export class StepComponent implements OnInit {
     };
     const receiveData = (payload) => {
       // getDevice sendFile
-      // console.log("receiveData:xx=>", payload);
-      if (['reslove', 'reject'].includes(payload.status.state)) {
-        console.log('receiveData:xx=>', payload);
-      }
+      console.log('receiveData:xx=>', payload);
+      // if (['reslove', 'reject'].includes(payload.status.state)) {
+      //   console.log('receiveData:xx=>', payload);
+      // }
     };
 
     if (this.ws) {

@@ -512,10 +512,13 @@
                                     lockTimeout = true;
                                     transportOfUnload.call(this, { callBack, backOff, topic, name, state: 'reject', type: 'receiveData', unsubscribeMark: requestId, timeoutCacheMark: requestId });
                                 }
+                                else{
+                                    transportOfUnload.call(this, { callBack, payload, backOff, topic, name, state: 'reslove', type: 'receiveData', unsubscribeMark: requestId, timeoutCacheMark: requestId });
+                                }
                             }
-                            if (!lockTimeout) {
-                                transportOfUnload.call(this, { callBack, payload, backOff, topic, name, state: 'pending', type: 'receiveData', unsubscribeMark: requestId, timeoutCacheMark: requestId });
-                            }
+                            // if (!lockTimeout) {
+                            //     transportOfUnload.call(this, { callBack, payload, backOff, topic, name, state: 'pending', type: 'receiveData', unsubscribeMark: requestId, timeoutCacheMark: requestId });
+                            // }
                         } else {
                             transportOfUnload.call(this, { timeoutCacheMark: requestId, unsubscribeMark: requestId, });
                         }
@@ -734,11 +737,14 @@
                                     console.log('timeoutCache', requestId);
                                     lockTimeout = true;
                                     transportOfUnload.call(this, { callBack, backOff, topic, name, state: 'reject', type: 'receiveData', unsubscribeMark: requestId, timeoutCacheMark: requestId });
+                                } 
+                                else{
+                                    transportOfUnload.call(this, { callBack, payload, backOff, topic, name, state: 'reslove', type: 'receiveData', unsubscribeMark: requestId, timeoutCacheMark: requestId });
                                 }
                             }
-                            if (!lockTimeout) {
-                                transportOfUnload.call(this, { callBack, payload, backOff, topic, name, state: 'pending', type: 'receiveData', unsubscribeMark: requestId, timeoutCacheMark: requestId });
-                            }
+                            // if (!lockTimeout) {
+                            //     transportOfUnload.call(this, { callBack, payload, backOff, topic, name, state: 'pending', type: 'receiveData', unsubscribeMark: requestId, timeoutCacheMark: requestId });
+                            // }
                         } else {
                             transportOfUnload.call(this, { unsubscribeMark: requestId, timeoutCacheMark: requestId });
                         }
@@ -1802,7 +1808,6 @@
         }
 
         init() {
-            debugger;
             const { wsUrl } = this.getWsSpaced();
             wsUrl.forEach(({ name, domain }) => {
                 console.log([name, domain]);
