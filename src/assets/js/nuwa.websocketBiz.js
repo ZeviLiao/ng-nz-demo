@@ -341,8 +341,8 @@
                     this.ps.subscribe(requestId, payload => {
                         console.log('login:', requestId, payload, payload.data);
                         if (!lockTimeout) {
-                            this.connectState = 'reslove';
-                            transportOfUnload.call(this, { callBack, payload, topic, name, state: 'reslove', type: 'connectStatus', unsubscribeMark: requestId, timeoutCacheMark: requestId });
+                            this.connectState = 'resolve';
+                            transportOfUnload.call(this, { callBack, payload, topic, name, state: 'resolve', type: 'connectStatus', unsubscribeMark: requestId, timeoutCacheMark: requestId });
                             this.callBack('connectStatus', { status: { code: this.statusCode, state: 'on' }, payload: { 'desc': 'nwk on' } });
                             this.loginedHandler();
                         } else {
@@ -403,7 +403,7 @@
                         console.log(JSON.parse(
                             JSON.stringify(data)
                         ));
-                        transportOfUnload.call(this, { callBack, payload: data.data.data, backOff, topic, name, state: 'reslove', type: 'receiveData', timeoutCacheMark: requestId });
+                        transportOfUnload.call(this, { callBack, payload: data.data.data, backOff, topic, name, state: 'resolve', type: 'receiveData', timeoutCacheMark: requestId });
                     } else {
                         transportOfUnload.call(this, { callBack, payload: error, backOff, topic, name, state: 'reject', type: 'receiveData', timeoutCacheMark: requestId });
                     }
@@ -453,7 +453,7 @@
                             transportOfUnload.call(this, { payload: error2, callBack, backOff, topic, name, state: 'reject', type: 'receiveData', timeoutCacheMark: requestId });
                             return
                         } else {
-                            transportOfUnload.call(this, { payload: data2, callBack, backOff, topic, name, state: 'reslove', type: 'receiveData', timeoutCacheMark: requestId });
+                            transportOfUnload.call(this, { payload: data2, callBack, backOff, topic, name, state: 'resolve', type: 'receiveData', timeoutCacheMark: requestId });
                         }
                     } else {
                         transportOfUnload.call(this, { timeoutCacheMark: requestId });
@@ -482,17 +482,17 @@
                             transportOfUnload.call(this, { callBack, backOff, topic, name, state: 'reject', type: 'receiveData', unsubscribeMark: requestId, timeoutCacheMark: requestId });
                         }
                     }, sendTimeoutInterval);
-                    let result = [], resloveCount = 0, rejectCount = 0;
+                    let result = [], resolveCount = 0, rejectCount = 0;
                     this.ps.subscribe(requestId, payload => {
                         console.log("set_slide_install:", payload, requestId, lockTimeout);
                         if (!lockTimeout) {
 
                             if (payload.cmd === 'slide_install_result') {
                                 if (payload.data.result) {
-                                    resloveCount++;
-                                    if (resloveCount >= result.filter(item => item.status === 'active').length) {
+                                    resolveCount++;
+                                    if (resolveCount >= result.filter(item => item.status === 'active').length) {
                                         lockTimeout = true;
-                                        transportOfUnload.call(this, { callBack, payload, backOff, topic, name, state: 'reslove', type: 'receiveData', unsubscribeMark: requestId, timeoutCacheMark: requestId });
+                                        transportOfUnload.call(this, { callBack, payload, backOff, topic, name, state: 'resolve', type: 'receiveData', unsubscribeMark: requestId, timeoutCacheMark: requestId });
                                     }
                                 } else {
                                     rejectCount++;
@@ -513,7 +513,7 @@
                                     transportOfUnload.call(this, { callBack, backOff, topic, name, state: 'reject', type: 'receiveData', unsubscribeMark: requestId, timeoutCacheMark: requestId });
                                 }
                                 else{
-                                    transportOfUnload.call(this, { callBack, payload, backOff, topic, name, state: 'reslove', type: 'receiveData', unsubscribeMark: requestId, timeoutCacheMark: requestId });
+                                    transportOfUnload.call(this, { callBack, payload, backOff, topic, name, state: 'resolve', type: 'receiveData', unsubscribeMark: requestId, timeoutCacheMark: requestId });
                                 }
                             }
                             // if (!lockTimeout) {
@@ -592,8 +592,8 @@
                         console.log('login:', requestId, payload, payload.data);
                         if (!lockTimeout) {
                             this.setState({ clientId: payload.data.clientId }, 'body');
-                            transportOfUnload.call(this, { name, callBack, payload, topic, state: 'reslove', type: 'connectStatus', unsubscribeMark: requestId, timeoutCacheMark: requestId });
-                            this.connectState = 'reslove';
+                            transportOfUnload.call(this, { name, callBack, payload, topic, state: 'resolve', type: 'connectStatus', unsubscribeMark: requestId, timeoutCacheMark: requestId });
+                            this.connectState = 'resolve';
                             this.callBack('connectStatus', { status: { code: this.statusCode, state: 'on' }, payload: { 'desc': 'nwk on' } });
                             this.loginedHandler();
                         } else {
@@ -638,7 +638,7 @@
                             return
                         }
                         console.log('get_white_list:', payload);
-                        transportOfUnload.call(this, { callBack, payload, backOff, topic, name, state: 'reslove', type: 'receiveData', unsubscribeMark: 'get_white_list', timeoutCacheMark: requestId });
+                        transportOfUnload.call(this, { callBack, payload, backOff, topic, name, state: 'resolve', type: 'receiveData', unsubscribeMark: 'get_white_list', timeoutCacheMark: requestId });
                     }, true);
 
                     this.send({
@@ -671,7 +671,7 @@
 
                     this.ps.subscribe(requestId, payload => {
                         console.log('get_white_list:', payload);
-                        transportOfUnload.call(this, { callBack, payload, backOff, topic, name, state: 'reslove', type: 'receiveData', unsubscribeMark: requestId, timeoutCacheMark: requestId });
+                        transportOfUnload.call(this, { callBack, payload, backOff, topic, name, state: 'resolve', type: 'receiveData', unsubscribeMark: requestId, timeoutCacheMark: requestId });
                     }, true);
 
                     this.send({
@@ -708,17 +708,17 @@
                             transportOfUnload.call(this, { unsubscribeMark: requestId, timeoutCacheMark: requestId });
                         }
                     }, sendTimeoutInterval);
-                    let result = [], resloveCount = 0, rejectCount = 0;
+                    let result = [], resolveCount = 0, rejectCount = 0;
                     this.ps.subscribe(requestId, payload => {
                         console.log("set_slide_install:", payload, requestId, lockTimeout);
                         if (!lockTimeout) {
 
                             if (payload.cmd === 'slide_install_result') {
                                 if (payload.data.result) {
-                                    resloveCount++;
-                                    if (resloveCount >= result.filter(item => item.status === 'active').length) {
+                                    resolveCount++;
+                                    if (resolveCount >= result.filter(item => item.status === 'active').length) {
                                         lockTimeout = true;
-                                        transportOfUnload.call(this, { callBack, payload, backOff, topic, name, state: 'reslove', type: 'receiveData', unsubscribeMark: requestId, timeoutCacheMark: requestId });
+                                        transportOfUnload.call(this, { callBack, payload, backOff, topic, name, state: 'resolve', type: 'receiveData', unsubscribeMark: requestId, timeoutCacheMark: requestId });
                                     }
                                 } else {
                                     rejectCount++;
@@ -739,7 +739,7 @@
                                     transportOfUnload.call(this, { callBack, backOff, topic, name, state: 'reject', type: 'receiveData', unsubscribeMark: requestId, timeoutCacheMark: requestId });
                                 } 
                                 else{
-                                    transportOfUnload.call(this, { callBack, payload, backOff, topic, name, state: 'reslove', type: 'receiveData', unsubscribeMark: requestId, timeoutCacheMark: requestId });
+                                    transportOfUnload.call(this, { callBack, payload, backOff, topic, name, state: 'resolve', type: 'receiveData', unsubscribeMark: requestId, timeoutCacheMark: requestId });
                                 }
                             }
                             // if (!lockTimeout) {
@@ -796,8 +796,8 @@
                     this.ps.subscribe(requestId, payload => {
                         console.log('login:', requestId, payload, payload.data);
                         if (!lockTimeout) {
-                            this.connectState = 'reslove';
-                            transportOfUnload.call(this, { callBack, payload, topic, name, state: 'reslove', type: 'connectStatus', unsubscribeMark: requestId, timeoutCacheMark: requestId });
+                            this.connectState = 'resolve';
+                            transportOfUnload.call(this, { callBack, payload, topic, name, state: 'resolve', type: 'connectStatus', unsubscribeMark: requestId, timeoutCacheMark: requestId });
                             this.loginedHandler();
                         } else {
                             transportOfUnload.call(this, { unsubscribeMark: requestId, timeoutCacheMark: requestId });
@@ -857,7 +857,7 @@
                         console.log(JSON.parse(
                             JSON.stringify(data)
                         ));
-                        transportOfUnload.call(this, { callBack, payload: data.data.data, backOff, topic, name, state: 'reslove', type: 'receiveData', timeoutCacheMark: requestId });
+                        transportOfUnload.call(this, { callBack, payload: data.data.data, backOff, topic, name, state: 'resolve', type: 'receiveData', timeoutCacheMark: requestId });
                     } else {
                         transportOfUnload.call(this, { callBack, payload: error, backOff, topic, name, state: 'reject', type: 'receiveData', timeoutCacheMark: requestId });
                     }
@@ -886,17 +886,17 @@
                             transportOfUnload.call(this, { callBack, backOff, topic, name, state: 'reject', type: 'receiveData', unsubscribeMark: requestId, timeoutCacheMark: requestId });
                         }
                     }, sendTimeoutInterval);
-                    let result = [], resloveCount = 0, rejectCount = 0;
+                    let result = [], resolveCount = 0, rejectCount = 0;
                     this.ps.subscribe(requestId, payload => {
                         console.log("set_brain_war_install:", payload, requestId, lockTimeout);
                         if (!lockTimeout) {
 
                             if (payload.cmd === 'brain_war_install_result') {
                                 if (payload.data.result) {
-                                    resloveCount++;
-                                    if (resloveCount >= result.filter(item => item.status === 'active').length) {
+                                    resolveCount++;
+                                    if (resolveCount >= result.filter(item => item.status === 'active').length) {
                                         lockTimeout = true;
-                                        transportOfUnload.call(this, { callBack, payload, backOff, topic, name, state: 'reslove', type: 'receiveData', unsubscribeMark: requestId, timeoutCacheMark: requestId });
+                                        transportOfUnload.call(this, { callBack, payload, backOff, topic, name, state: 'resolve', type: 'receiveData', unsubscribeMark: requestId, timeoutCacheMark: requestId });
                                     }
                                 } else {
                                     rejectCount++;
@@ -979,7 +979,7 @@
                             transportOfUnload.call(this, { payload: error2, callBack, backOff, topic, name, state: 'reject', type: 'receiveData', timeoutCacheMark: requestId });
                             return
                         } else {
-                            transportOfUnload.call(this, { payload: data2, callBack, backOff, topic, name, state: 'reslove', type: 'receiveData', timeoutCacheMark: requestId });
+                            transportOfUnload.call(this, { payload: data2, callBack, backOff, topic, name, state: 'resolve', type: 'receiveData', timeoutCacheMark: requestId });
                         }
                     } else {
                         transportOfUnload.call(this, { timeoutCacheMark: requestId });
@@ -1014,8 +1014,8 @@
                         console.log('login:', requestId, payload, payload.data);
                         if (!lockTimeout) {
                             this.setState({ clientId: payload.data.clientId }, 'body');
-                            transportOfUnload.call(this, { callBack, payload, name, topic: 'login', state: 'reslove', type: 'connectStatus', unsubscribeMark: requestId, timeoutCacheMark: requestId });
-                            this.connectState = 'reslove';
+                            transportOfUnload.call(this, { callBack, payload, name, topic: 'login', state: 'resolve', type: 'connectStatus', unsubscribeMark: requestId, timeoutCacheMark: requestId });
+                            this.connectState = 'resolve';
                             this.loginedHandler();
                         } else {
                             transportOfUnload.call(this, { unsubscribeMark: requestId, timeoutCacheMark: requestId });
@@ -1060,7 +1060,7 @@
                     this.ps.subscribe('get_white_list', payload => {
                         console.log('get_white_list:', payload);
                         if (!lockTimeout) {
-                            transportOfUnload.call(this, { callBack, payload, name, backOff, topic, state: 'reslove', type: 'receiveData', unsubscribeMark: 'get_white_list', timeoutCacheMark: requestId });
+                            transportOfUnload.call(this, { callBack, payload, name, backOff, topic, state: 'resolve', type: 'receiveData', unsubscribeMark: 'get_white_list', timeoutCacheMark: requestId });
                         } else {
                             transportOfUnload.call(this, { unsubscribeMark: 'get_white_list', timeoutCacheMark: requestId });
                         }
@@ -1099,17 +1099,17 @@
                             transportOfUnload.call(this, { timeoutCacheMark: requestId });
                         }
                     }, sendTimeoutInterval);
-                    let result = [], resloveCount = 0, rejectCount = 0;
+                    let result = [], resolveCount = 0, rejectCount = 0;
                     this.ps.subscribe(requestId, payload => {
                         console.log("set_brain_war_install:", payload, requestId, lockTimeout);
                         if (!lockTimeout) {
 
                             if (payload.cmd === 'brain_war_install_result') {
                                 if (payload.data.result) {
-                                    resloveCount++;
-                                    if (resloveCount >= result.filter(item => item.status === 'active').length) {
+                                    resolveCount++;
+                                    if (resolveCount >= result.filter(item => item.status === 'active').length) {
                                         lockTimeout = true;
-                                        transportOfUnload.call(this, { callBack, payload, backOff, topic, name, state: 'reslove', type: 'receiveData', unsubscribeMark: requestId, timeoutCacheMark: requestId });
+                                        transportOfUnload.call(this, { callBack, payload, backOff, topic, name, state: 'resolve', type: 'receiveData', unsubscribeMark: requestId, timeoutCacheMark: requestId });
                                     }
                                 } else {
                                     rejectCount++;
@@ -1172,7 +1172,7 @@
 
                     this.ps.subscribe(requestId, payload => {
                         console.log('get_white_list:', payload);
-                        transportOfUnload.call(this, { callBack, payload, backOff, topic, name, state: 'reslove', type: 'receiveData', unsubscribeMark: requestId, timeoutCacheMark: requestId });
+                        transportOfUnload.call(this, { callBack, payload, backOff, topic, name, state: 'resolve', type: 'receiveData', unsubscribeMark: requestId, timeoutCacheMark: requestId });
                     }, true);
 
                     this.send({
@@ -1261,7 +1261,7 @@
             this.name = name;
             this.connectId = '';
             this.statusCode = 0; // 4999: 超过最大重连次数
-            this.connectState = ''; // pending reslove reject
+            this.connectState = ''; // pending resolve reject
             this.needConnect = false;
             this.logined = false;
             this.domain = domain;

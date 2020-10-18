@@ -11,8 +11,8 @@ declare global {
 }
 const { WebSocketProccess } = window.nuwa;
 
-// const slideServerUrl = 'https://dev-slide-api.nuwarobotics.com/api-admin/v1' + '/presentations/2/distribute';
-const slideServerUrl = 'https://dev-slide-api.nuwarobotics.com/api-admin/v1' + '/presentations/2/file-url';
+const slideServerUrl = 'https://dev-slide-api.nuwarobotics.com/api-admin/v1' + '/presentations/2/distribute';
+// const slideServerUrl = 'https://dev-slide-api.nuwarobotics.com/api-admin/v1' + '/presentations/2/file-url';
 
 
 
@@ -40,7 +40,7 @@ export class StepComponent implements OnInit {
   result = true;
   timer;
   team = [];
-  token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL2Rldi1hcGkubnV3YXJvYm90aWNzLmNvbSIsInN1YiI6ImF1dGguZGV2Lm51d2Fyb2JvdGljc3wxNzcxNjA3MzM3OTkiLCJhdWQiOiIyODk5MDk1OC1DQ0FFLTQ5QjktQjg2MS0wRDQyQTdENURERkUiLCJpYXQiOjE2MDI4MjgzMTYsImV4cCI6MTYwMzA4NzUxNiwianRpIjoiNDI4OWQ0YjItYTQ0YS00MTU0LTljZTctMWI3MmFhNzliNWQ1IiwiY29udGV4dCI6eyJ0eXBlIjoiYWNjZXNzIiwicHJvdmlkZXIiOiJuZXdOdXdhfHpldmlsaWFvQGdtYWlsLmNvbSJ9LCJzY29wZSI6InVhbXMgcm1zX3VzZXIgY29kZUxhYiBtYXRlcmlhbExpYnJheSBkZXZlbG9wVG9vbCBzbGlkZSBjb250ZW50RWRpdG9yIHNoYXJpbmdBY2NvdW50In0.DwjBbEilGCtJRWMfocp8uoxGZiBLj1-I9W9shMlg9A1p1fzeZWyzijQKRCQUmlDFKm7kDXJtrjQZAeYQliyfc4gB7H1zGiMEXevTuyDaQls4ATVF8dzmaG6-i_Gk3MHDhZVk9E_VkhCxpkPISfauRMRUQcBunLWhgk3m0XSTfXe7Jx-d43tWj7UL-4G3yr5MDyVAzDizZg8MOAqUPv_kfJmkctnJJdmUWyJsTTO7EPSSq8MAyhmRU286zwlmp-LngNsMqop4zP1lh10x29E8pbux-oa_s012XskwJ2hP5cSVXfddQJCDPej0vxV-vb8Qe4PdHSgBOSmJnkStFkj6vA';
+  token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL2Rldi1hcGkubnV3YXJvYm90aWNzLmNvbSIsInN1YiI6ImF1dGguZGV2Lm51d2Fyb2JvdGljc3wxNzcxNjA3MzM3OTkiLCJhdWQiOiIyODk5MDk1OC1DQ0FFLTQ5QjktQjg2MS0wRDQyQTdENURERkUiLCJpYXQiOjE2MDI5ODk2OTMsImV4cCI6MTYwMzI0ODg5MywianRpIjoiMTI5MzEyYWUtZTQyNC00MGFkLTk0M2ItYWU2Y2I5ZDEyMWU1IiwiY29udGV4dCI6eyJ0eXBlIjoiYWNjZXNzIiwicHJvdmlkZXIiOiJuZXdOdXdhfHpldmlsaWFvQGdtYWlsLmNvbSJ9LCJzY29wZSI6InVhbXMgcm1zX3VzZXIgY29kZUxhYiBtYXRlcmlhbExpYnJheSBkZXZlbG9wVG9vbCBzbGlkZSBjb250ZW50RWRpdG9yIHNoYXJpbmdBY2NvdW50In0.Dc8P91UHdx91tcRlkj0SpmUUhbw7aBRXrgFgX2-ZIAfSn1WRqCPKZUaOiEri2iiWPprzzeZZpGaPXf9lOYZWFoAQbapLM3go5hnwP-enh26Rdt82MuUqY4f1CeCgW4gEq13vSTdAU_GI2Wr4L9FNPeApShe7Ot7tgt0OYDD5beJLYePmHuCz6ikwbm3jJ8y_8Xe3LWU0oewsXtU0o4WkZMV7P82SKBE4nt1TEGCohAx7qLrU3X_7AFau-VnQvhBF3C5hF5bpPcOHiIOUN-PYpKP7apZBIChYuG8QALfyfE6_yUQFoPO-ytBKEckLsv2TsOoPuNHMoQKQwYiyTz6kyQ';
   customerId = 'NB1557903870927'; // "NB1557903870926",
   curCnnState = false;
   httpOptions = {
@@ -72,6 +72,19 @@ export class StepComponent implements OnInit {
   robots = [];
   presentationId = '2';
   curName = '';
+  curState = false;
+
+  projectId = '2';
+  url = 'ptt-2-1602560231286.zip';
+  projectName = 'ptt-2-1602560231286.zip';
+  newProjectName = 'ptt-2-1602560231286.zip';
+  zipFileInfo: {
+    presentationId: string,
+    title,
+    zipFileName,
+    zipFileSize,
+    zipFileMd5
+  };
 
   @Input()
   curStateIndex = 0;
@@ -131,25 +144,33 @@ export class StepComponent implements OnInit {
 
   async getAsyncZipData() {
     const url = '';
-    return await this.httpClient.get<any>(
-      slideServerUrl, this.httpOptions
+    return await this.httpClient.post<any>(
+      slideServerUrl, {}, this.httpOptions
     ).toPromise();
     // console.log('No issues, I will wait until promise is resolved..');
   }
 
   async process() {
     console.log('zevi', 'process');
-    debugger;
     this.navStep(2);
     // pack and get zip file info.
-    const fileInfo = await this.getAsyncZipData();
-    console.log('zevi', fileInfo);
+
+
+    // {
+    //   "presentationId": 2,
+    //   "title": "zppt3",
+    //   "zipFileName": "ptt-2-1602997641848.zip",
+    //   "zipFileSize": "148489",
+    //   "zipFileMd5": "e17c865aded12813c4e08ba5d36f1474"
+    // }
+    this.zipFileInfo = await this.getAsyncZipData();
+    this.zipFileInfo.presentationId = this.zipFileInfo.presentationId + '';
+
     // this.next();
     // get file info send file.
 
     const ok = await this.sendFile();
     if (ok) {
-      debugger;
       this.navStep(3);
     } else {
       this.navStep(4); // error
@@ -176,9 +197,14 @@ export class StepComponent implements OnInit {
     //     // }).catch(() => console.log('Oops errors!'))
     //     console.log('ok')
     // });
-    bootbox.confirm('This is the default confirm!', function(result) {
-      console.log('This was logged in the callback: ' + result);
-    });
+    const self = this;
+    bootbox.confirm('This is the default confirm!',
+      function(result) {
+        console.log('This was logged in the callback: ' + result);
+        if (result) {
+          self.backToRms();
+        }
+      });
   }
 
   async login() {
@@ -208,7 +234,7 @@ export class StepComponent implements OnInit {
     this.ws.subscribe.getDevice((payload) => {
       // console.log(payload, "getDevice:");
       this.curName = payload.name;
-      if (payload.status.state === 'reslove') {
+      if (payload.status.state === 'resolve') {
         if (payload.name === 'white') {
           // 白名单没有
           console.log(payload.payload.data.list);
@@ -232,7 +258,7 @@ export class StepComponent implements OnInit {
             })
             .flat();
         }
-        // console.log("getDevice_reslove:", this.robotClientIds, payload);
+        // console.log("getDevice_resolve:", this.robotClientIds, payload);
       }
     }); // name == rms 可携带参数 { page: xx, limit: xxx  } 分页查询设备
   }
@@ -240,15 +266,15 @@ export class StepComponent implements OnInit {
   sendFile() {
     console.log('sendFile');
     const { /*presentationId,*/ robotClientIds } = this;
+    const self = this;
 
     return new Promise((rev, rej) => {
       this.ws.subscribe.sendFile(
         (payload) => {
-          debugger;
           console.log(payload, 'sendFile:');
           // rev(true);
-          if (payload.status.state === 'reslove') {
-            // console.log(payload, 'sendFile_reslove:');
+          if (payload.status.state === 'resolve') {
+            // console.log(payload, 'sendFile_resolve:');
             rev(true);
           } else if (payload.status.state === 'reject') {
             rev(false);
@@ -256,10 +282,10 @@ export class StepComponent implements OnInit {
         },
         // { robotClientIds, presentationId }
         {
-          url: 'ptt-2-1602560231286.zip', // destinationName url 和 to 为必填
+          url: self.zipFileInfo.zipFileName, // 'ptt-2-1602560231286.zip', // destinationName url 和 to 为必填
           to: robotClientIds,
-          md5: '0c75a73dfc458ab705e648ed5422765a',
-          size: 306153,
+          md5: self.zipFileInfo.zipFileMd5, // '0c75a73dfc458ab705e648ed5422765a',
+          size: +(self.zipFileInfo.zipFileSize) // 306153,
         }
       );
 
@@ -267,10 +293,81 @@ export class StepComponent implements OnInit {
 
   }
 
+  async backToRms(forceOverwrite = {}) {
+    const self = this;
+    const body = {
+      projectId: self.zipFileInfo.presentationId,
+      url: self.zipFileInfo.zipFileName,
+      type: 'slide',
+      projectName: `${self.zipFileInfo.title}.zip` ,
+      newProjectName: `${self.zipFileInfo.title}.zip`,
+      forceOverwrite: undefined,
+      ...forceOverwrite,
+    };
+    console.log(body, forceOverwrite);
+    const [data, err] = await axios({
+      method: 'post',
+      url: 'http://dev-api.nuwarobotics.com/v1/rms/upload/to/rms',
+      headers: {
+        Authorization: 'Bearer ' + this.token,
+        customerid: 'NB1557903870927' // this.customerId,
+      },
+      data: body,
+    })
+      .then((res) => [res, null])
+      .catch((err) => [null, err]);
+    // console.log("uploadToRms=>", data);
+
+    if (data) {
+      let msg = 'backup ok!';
+      if (body.forceOverwrite) {
+        msg = 'over write ok!';
+      }
+      bootbox.alert(msg);
+    }
+
+    if (err) {
+      const response = err.response;
+      if (
+        response &&
+        response.data &&
+        response.data.status &&
+        response.data.status.description.indexOf('data exist') > -1
+      ) {
+        bootbox.confirm({
+          title: '重複專案提示',
+          message: '檔案已存在, 繼續將覆蓋已經存在的檔案, 是否继续?',
+          buttons: {
+            cancel: {
+              label: '新增檔案'
+            },
+            confirm: {
+              label: '確定覆蓋'
+            }
+          },
+          callback(result) {
+            console.log('This was logged in the callback: ' + result);
+            if (result) {
+              self.backToRms({ forceOverwrite: 'Y' });
+            } else {
+              const newProjectName = response.data.status.message;
+              self.backToRms({
+                forceAdd: 'Y',
+                newProjectName,
+              });
+            }
+          }
+        });
+      } else {
+        bootbox.alert('備份失敗');
+      }
+    }
+  }
+
   connect() {
     const connectStatus = (payload: any) => {
       console.log('connectStatus:xx=>', payload);
-      if (payload.status.state === 'reslove') {
+      if (payload.status.state === 'resolve') {
         console.log('已登录');
         this.curCnnState = true;
         if (this.curCnnState) {
@@ -292,7 +389,7 @@ export class StepComponent implements OnInit {
     const receiveData = (payload) => {
       // getDevice sendFile
       console.log('receiveData:xx=>', payload);
-      // if (['reslove', 'reject'].includes(payload.status.state)) {
+      // if (['resolve', 'reject'].includes(payload.status.state)) {
       //   console.log('receiveData:xx=>', payload);
       // }
     };
