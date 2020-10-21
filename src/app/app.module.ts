@@ -31,8 +31,11 @@ import { StepDialogComponent } from './step-dialog/step-dialog.component';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { StepComponent } from './step/step.component';
 import { StepBarComponent } from './step-bar/step-bar.component';
+import { ElebtnComponent } from './elebtn/elebtn.component';
+import { ElModule } from 'element-angular';
 
 registerLocaleData(en);
+
 
 @NgModule({
   declarations: [
@@ -44,6 +47,7 @@ registerLocaleData(en);
     StepComponent,
     StepDialogComponent,
     StepBarComponent,
+    ElebtnComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,7 +67,8 @@ registerLocaleData(en);
     // ClarityModule,
     TreeModule,
     NzStepsModule,
-    NzModalModule
+    NzModalModule,
+    ElModule.forRoot(),
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

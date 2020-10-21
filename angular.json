@@ -22,7 +22,7 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
-            "aot": true,
+            "aot": false,
             "assets": [
               "src/favicon.ico",
               "src/assets",
@@ -36,6 +36,7 @@
               "node_modules/bootstrap/dist/css/bootstrap.css",
               "node_modules/bootstrap-select/dist/css/bootstrap-select.css",
               "node_modules/@circlon/angular-tree-component/css/angular-tree-component.css",
+              "node_modules/element-angular/theme/index.css",
               "src/theme.less",
               "src/styles.scss"
             ],
