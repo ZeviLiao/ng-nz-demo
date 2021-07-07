@@ -27,6 +27,7 @@
     "bootstrap-select": "^1.13.18",
     "bootstrap-treeview": "^1.2.0",
     "element-angular": "^0.7.6",
+    "font-awesome": "^4.7.0",
     "jquery": "^3.5.1",
     "ng-zorro-antd": "^9.3.0",
     "ngx-treeview": "^10.0.2",

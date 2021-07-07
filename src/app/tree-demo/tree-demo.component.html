@@ -13,11 +13,7 @@
   placeholder="filter nodes"
 />
 <button (click)="tree.treeModel.clearFilter()">Clear Filter</button>
-<tree-root #tree 
-  [focused]="true"
-  class="reverse"
-  [options]="options" 
-  [nodes]="nodes">
+<tree-root #tree [focused]="true" class="reverse" [options]="options" [nodes]="nodes">
   <ng-template #treeNodeTemplate let-node let-index="index">
     <span>{{ node.data.name }}</span>
     <button>Custom Action</button>

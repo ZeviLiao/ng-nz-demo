@@ -34,6 +34,8 @@ import { StepBarComponent } from './step-bar/step-bar.component';
 // import { ElebtnComponent } from './elebtn/elebtn.component';
 import { ElModule } from 'element-angular';
 import { TreePanelComponent } from './tree-panel/tree-panel.component';
+import { TreeItemComponent } from './tree-item/tree-item.component';
+import { PanelItemComponent } from './panel-item/panel-item.component';
 
 registerLocaleData(en);
 
@@ -50,6 +52,8 @@ registerLocaleData(en);
     StepBarComponent,
     // ElebtnComponent,
     TreePanelComponent,
+    TreeItemComponent,
+    PanelItemComponent,
   ],
   imports: [
     BrowserModule,

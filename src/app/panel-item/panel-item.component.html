@@ -1,0 +1,16 @@
+<div class="panel-group">
+
+  <!-- First Panel -->
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title" data-toggle="collapse" [attr.data-target]="'#collapse'+itemId">Collapsible Group Item #1</h4>
+    </div>
+    
+    <div [id]="'collapse'+itemId" class="panel-collapse collapse">
+      <div class="panel-body">
+        {{unBoundData}}
+      </div>
+    </div>
+  </div>
+
+</div>

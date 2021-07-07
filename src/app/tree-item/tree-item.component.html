@@ -1,0 +1,5 @@
+<tree-root #tree [focused]="true" class="reverse" [options]="options" [nodes]="[node]">
+    <ng-template #treeNodeTemplate let-node let-index="index">
+      <span>{{ node.data.name }}</span>
+    </ng-template>
+  </tree-root> 
