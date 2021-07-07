@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-tree-panel',
@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TreePanelComponent implements OnInit {
 
-  checkedIds=[];
+  checkedIds = [[]];
 
   nodes = [
     {
@@ -43,6 +43,12 @@ export class TreePanelComponent implements OnInit {
   ];
 
   ngOnInit(): void {
+  }
+
+  constructor(private cdref: ChangeDetectorRef) { }
+
+  ngAfterContentChecked() {
+    this.cdref.detectChanges();
   }
 
 }

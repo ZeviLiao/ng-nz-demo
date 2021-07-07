@@ -1,12 +1,15 @@
 
 <div>
   {{checkedIds.flat() | json}}
-  <div *ngFor="let node of nodes; let i = index" >
-    <app-tree-item [nodes]="[node]" [(checkedIds)]="checkedIds[i]">
-    </app-tree-item>
-    <app-panel-item [unBoundData]="node.unBoundData" [itemId]="i">
-    </app-panel-item>
-  </div>
+
+    <div *ngFor="let node of nodes; let i = index" >
+      <app-tree-item [nodes]="[node]" [(checkedIds)]="checkedIds[i]">
+      </app-tree-item>
+      <app-panel-item [unBoundData]="node.unBoundData" [itemId]="i">
+      </app-panel-item>
+    </div>
+
+
 
 </div>
 
