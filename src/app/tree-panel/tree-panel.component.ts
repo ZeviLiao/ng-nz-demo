@@ -5,7 +5,9 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './tree-panel.component.html',
   styleUrls: ['./tree-panel.component.scss']
 })
-export class TreePanelComponent {
+export class TreePanelComponent implements OnInit {
+
+  checkedIds=[];
 
   nodes = [
     {
@@ -39,5 +41,8 @@ export class TreePanelComponent {
       unBoundData: ['aa1', 'bb2']
     }
   ];
+
+  ngOnInit(): void {
+  }
 
 }

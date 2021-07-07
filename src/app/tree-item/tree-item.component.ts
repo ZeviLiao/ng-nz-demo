@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, AfterViewInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit, ViewChild, OnDestroy } from '@angular/core';
 import { ITreeOptions, TreeModel, TreeNode } from '@circlon/angular-tree-component';
 
 @Component({
@@ -14,6 +14,8 @@ export class TreeItemComponent implements AfterViewInit, OnDestroy {
     useCheckbox: true
   };
   @Input() nodes = [];
+  @Input() checkedIds: string[] = [];
+  @Output() checkedIdsChange = new EventEmitter<string[]>();
 
   ngAfterViewInit() {
     this.treeComponent.treeModel.subscribeToState((state: any) => { // ITreeState does not contain selectedLeafNodeIds
@@ -27,7 +29,8 @@ export class TreeItemComponent implements AfterViewInit, OnDestroy {
       for (const [key, value] of Object.entries(selected)) {
         if (value) { arr.push(key); }
       }
-      console.log(arr);
+      this.checkedIdsChange.emit(arr);
+
 
     });
   }
